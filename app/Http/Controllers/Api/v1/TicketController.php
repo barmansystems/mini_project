@@ -17,13 +17,14 @@ class TicketController extends Controller
             ->orWhere('receiver_id', $request->user_id)
             ->with(['sender:id,name', 'receiver:id,name'])
             ->latest()
-            ->paginate(30);
+            ->get();
 
         $object_ticket = $tickets->map(function ($ticket) {
             return (object)[
                 "id" => $ticket->id,
-                "sender_name" => $ticket->sender->name.' '.$ticket->sender->name,
-                "receiver_name" => $ticket->receiver->family.' '.$ticket->sender->family,
+                "sender_name" => $ticket->sender->name . ' ' . $ticket->sender->name,
+                "receiver_name" => $ticket->receiver->family . ' ' . $ticket->sender->family,
+                "company" => $ticket->receiver->company_name,
                 "title" => $ticket->title,
                 "code" => $ticket->code,
                 "status" => $ticket->status,
@@ -31,24 +32,19 @@ class TicketController extends Controller
             ];
         });
 
-        return response()->json([
-            'data' => $object_ticket,
-            'current_page' => $tickets->currentPage(),
-            'last_page' => $tickets->lastPage(),
-            'per_page' => $tickets->perPage(),
-            'total' => $tickets->total(),
-        ]);
+        return $object_ticket;
+
     }
 
     public function allTickets()
     {
-        $tickets = Ticket::latest()->paginate(30);
-
+        $tickets = Ticket::latest()->get();
         $object_ticket = $tickets->map(function ($ticket) {
             return (object)[
                 "id" => $ticket->id,
-                "sender_name" => $ticket->sender->name.' '.$ticket->sender->family,
-                "receiver_name" => $ticket->receiver->name.' '.$ticket->receiver->family,
+                "sender_name" => $ticket->sender->name . ' ' . $ticket->sender->family,
+                "receiver_name" => $ticket->receiver->name . ' ' . $ticket->receiver->family,
+                "company" => $ticket->receiver->company_name,
                 "title" => $ticket->title,
                 "code" => $ticket->code,
                 "status" => $ticket->status,
@@ -56,20 +52,13 @@ class TicketController extends Controller
             ];
         });
 
-        return response()->json([
-            'data' => $object_ticket,
-            'current_page' => $tickets->currentPage(),
-            'last_page' => $tickets->lastPage(),
-            'per_page' => $tickets->perPage(),
-            'total' => $tickets->total(),
-        ]);
+        return $object_ticket;
     }
 
     public function createTicket(Request $request)
     {
 
         $user_sender_ticket = User::where(['company_user_id' => $request->sender_id])->first();
-//        return $user_sender_ticket;
         $ticket = new Ticket();
         $ticket->sender_id = $user_sender_ticket->id;
         $ticket->receiver_id = $request->receiver_id;
@@ -131,4 +120,67 @@ class TicketController extends Controller
             return $newCode;
         }
     }
+
+
+    public function getMessages(Request $request)
+    {
+//        return ;
+        $ticket = Ticket::where('id', $request['ticket_id'])->first();
+        $ticket->messages()->whereNull('read_at')->where('user_id', '!=', auth()->id())->update(['read_at' => now()]);
+        return response()->json($ticket->load('messages.user', 'sender', 'receiver'));
+    }
+
+
+    public function chatInTickets(Request $request)
+    {
+
+
+        $ticket = Ticket::whereId($request->ticket_id)->first();
+
+
+        $ticket->update(['status' => 'pending']);
+
+        // prevent from send sequence notification
+        $first_message = $ticket->messages()->orderBy('created_at', 'desc')->first();
+
+        // end prevent from send sequence notification
+
+        if ($request->file) {
+            $file_info = [
+                'name' => $request->file('file')->getClientOriginalName(),
+                'type' => $request->file('file')->getClientOriginalExtension(),
+                'size' => $request->file('file')->getSize(),
+            ];
+
+            $file = $this->upload_file($request->file, 'Messages');
+
+            $file_info['path'] = $file;
+        }
+
+
+        $ticket->messages()->create([
+            'user_id' => $ticket->sender_id,
+            'text' => $request->text,
+            'file' => isset($file) ? json_encode($file_info) : null,
+        ]);
+
+        // log
+
+        return response()->json($ticket, 201);
+    }
+
+    public function deleteTicket(Request $request)
+    {
+        $ticket = Ticket::whereId($request->ticket_id)->first();
+        foreach ($ticket->messages as $message) {
+            if ($message->file) {
+                unlink(public_path(json_decode($message->file)->path));
+            }
+        }
+
+        $ticket->delete();
+        return 'success';
+    }
+
+
 }

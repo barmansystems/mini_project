@@ -25,3 +25,10 @@ Route::post('get-my-tickets', [TicketController::class, 'myTickets']);
 
 Route::post('create-ticket', [TicketController::class, 'createTicket']);
 Route::post('get-users', [TicketController::class, 'getUsers']);
+
+
+Route::post('get-messages', [TicketController::class, 'getMessages']);
+Route::post('chat-in-tickets', [TicketController::class, 'chatInTickets']);
+Route::post('delete-ticket', [TicketController::class, 'deleteTicket']);
+Route::post('change-status-ticket', [TicketController::class, 'changeStatusTicket']);
+
