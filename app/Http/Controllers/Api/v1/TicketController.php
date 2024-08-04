@@ -13,13 +13,17 @@ class TicketController extends Controller
 {
     public function myTickets(Request $request)
     {
+        $perPage = 10;
+
+
         $tickets = Ticket::where('sender_id', $request->user_id)
             ->orWhere('receiver_id', $request->user_id)
             ->with(['sender:id,name', 'receiver:id,name'])
             ->latest()
-            ->get();
+            ->paginate($perPage);
 
-        $object_ticket = $tickets->map(function ($ticket) {
+
+        $object_ticket = $tickets->getCollection()->map(function ($ticket) {
             return (object)[
                 "id" => $ticket->id,
                 "sender_name" => $ticket->sender->name . ' ' . $ticket->sender->name,
@@ -32,14 +36,29 @@ class TicketController extends Controller
             ];
         });
 
-        return $object_ticket;
+
+        return response()->json([
+            'data' => $object_ticket,
+            'pagination' => [
+                'total' => $tickets->total(),
+                'per_page' => $tickets->perPage(),
+                'current_page' => $tickets->currentPage(),
+                'last_page' => $tickets->lastPage(),
+                'next_page_url' => $tickets->nextPageUrl(),
+                'prev_page_url' => $tickets->previousPageUrl(),
+            ]
+        ]);
 
     }
 
     public function allTickets()
     {
-        $tickets = Ticket::latest()->get();
-        $object_ticket = $tickets->map(function ($ticket) {
+        $perPage = 10;
+
+
+        $tickets = Ticket::latest()->paginate($perPage);
+
+        $object_ticket = $tickets->getCollection()->map(function ($ticket) {
             return (object)[
                 "id" => $ticket->id,
                 "sender_name" => $ticket->sender->name . ' ' . $ticket->sender->family,
@@ -52,19 +71,32 @@ class TicketController extends Controller
             ];
         });
 
-        return $object_ticket;
+
+        return response()->json([
+            'data' => $object_ticket,
+            'pagination' => [
+                'total' => $tickets->total(),
+                'per_page' => $tickets->perPage(),
+                'current_page' => $tickets->currentPage(),
+                'last_page' => $tickets->lastPage(),
+                'next_page_url' => $tickets->nextPageUrl(),
+                'prev_page_url' => $tickets->previousPageUrl(),
+            ]
+        ]);
     }
 
     public function createTicket(Request $request)
     {
 
         $user_sender_ticket = User::where(['company_user_id' => $request->sender_id])->first();
+        $user_receiver_ticket = User::where(['id' =>  $request->receiver_id])->first();
         $ticket = new Ticket();
         $ticket->sender_id = $user_sender_ticket->id;
         $ticket->receiver_id = $request->receiver_id;
         $ticket->title = $request->title;
         $ticket->code = $this->generateCode();
         $ticket->save();
+
 
 
         if ($request->file) {
@@ -181,6 +213,66 @@ class TicketController extends Controller
         $ticket->delete();
         return 'success';
     }
+
+
+    public function changeStatusTicket(Request $request)
+    {
+
+        $ticket = Ticket::whereId($request->ticket_id)->first();
+        $user = User::where('company_user_id', $request->user_id)->first();
+        if ($ticket->sender_id == $user->id || $ticket->receiver_id == $user->id) {
+            if ($ticket->status == 'closed') {
+                $ticket->update(['status' => 'pending']);
+            } else {
+                $ticket->update(['status' => 'closed']);
+            }
+
+            return response()->json([
+                'status' => 'success',
+                'ticket' => $ticket,
+            ], 201);
+//
+        } else {
+            return response()->json([
+                'status' => 'failed',
+            ], 404);
+        }
+    }
+
+    public function addUserToMoshrefi(Request $request)
+    {
+        $user = new User();
+        $user->company_user_id = $request->company_user_id;
+        $user->name = $request->name;
+        $user->family = $request->family;
+        $user->company_name = $request->company_name;
+        $user->role_name = $request->role_name;
+        $user->phone = $request->phone;
+        $user->save();
+    }
+
+    public function editUserToMoshrefi(Request $request)
+    {
+//        return $request->all();
+        $user = User::where('company_user_id',$request->company_user_id)->first();
+        $user->company_user_id = $request->company_user_id;
+        $user->name = $request->name;
+        $user->family = $request->family;
+        $user->company_name = $request->company_name;
+        $user->role_name = $request->role_name;
+        $user->phone = $request->phone;
+        $user->save();
+        return $user;
+    }
+
+    public function deleteUserToMoshrefi(Request $request)
+    {
+        $user = User::where('company_user_id',$request->user_id)->first();
+        $user->delete();
+    }
+
+
+
 
 
 }

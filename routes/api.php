@@ -20,15 +20,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('get-all-tickets', [TicketController::class, 'allTickets']);
-Route::post('get-my-tickets', [TicketController::class, 'myTickets']);
+Route::match(['get','post'],'get-all-tickets', [TicketController::class, 'allTickets']);
+Route::match(['get','post'],'get-my-tickets', [TicketController::class, 'myTickets']);
 
 Route::post('create-ticket', [TicketController::class, 'createTicket']);
 Route::post('get-users', [TicketController::class, 'getUsers']);
 
 
-Route::post('get-messages', [TicketController::class, 'getMessages']);
-Route::post('chat-in-tickets', [TicketController::class, 'chatInTickets']);
+Route::get('get-messages', [TicketController::class, 'getMessages']);
+Route::get('chat-in-tickets', [TicketController::class, 'chatInTickets']);
 Route::post('delete-ticket', [TicketController::class, 'deleteTicket']);
 Route::post('change-status-ticket', [TicketController::class, 'changeStatusTicket']);
+Route::post('add-user', [TicketController::class, 'addUserToMoshrefi']);
+Route::post('edit-user', [TicketController::class, 'editUserToMoshrefi']);
+Route::post('delete-user', [TicketController::class, 'deleteUserToMoshrefi']);
+
 
