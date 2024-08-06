@@ -27,8 +27,8 @@ Route::post('create-ticket', [TicketController::class, 'createTicket']);
 Route::post('get-users', [TicketController::class, 'getUsers']);
 
 
-Route::get('get-messages', [TicketController::class, 'getMessages']);
-Route::get('chat-in-tickets', [TicketController::class, 'chatInTickets']);
+Route::match(['get','post'],'get-messages', [TicketController::class, 'getMessages']);
+Route::match(['get','post'],'chat-in-tickets', [TicketController::class, 'chatInTickets']);
 Route::post('delete-ticket', [TicketController::class, 'deleteTicket']);
 Route::post('change-status-ticket', [TicketController::class, 'changeStatusTicket']);
 Route::post('add-user', [TicketController::class, 'addUserToMoshrefi']);

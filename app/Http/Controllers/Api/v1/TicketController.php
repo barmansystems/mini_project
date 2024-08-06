@@ -7,27 +7,28 @@ use App\Models\Ticket;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 
 class TicketController extends Controller
 {
     public function myTickets(Request $request)
     {
+//        return $request->All();
         $perPage = 10;
-
-
-        $tickets = Ticket::where('sender_id', $request->user_id)
-            ->orWhere('receiver_id', $request->user_id)
-            ->with(['sender:id,name', 'receiver:id,name'])
+        $user = User::where('company_user_id', $request->user_id)->first();
+//        return $user;
+        $tickets = Ticket::where('sender_id', $user->id)
+            ->orWhere('receiver_id', $user->id)
             ->latest()
             ->paginate($perPage);
-
+//        return $tickets;
 
         $object_ticket = $tickets->getCollection()->map(function ($ticket) {
             return (object)[
                 "id" => $ticket->id,
-                "sender_name" => $ticket->sender->name . ' ' . $ticket->sender->name,
-                "receiver_name" => $ticket->receiver->family . ' ' . $ticket->sender->family,
+                "sender_name" => $ticket->sender->name . ' ' . $ticket->sender->family,
+                "receiver_name" => $ticket->receiver->name . ' ' . $ticket->receiver->family,
                 "company" => $ticket->receiver->company_name,
                 "title" => $ticket->title,
                 "code" => $ticket->code,
@@ -54,10 +55,7 @@ class TicketController extends Controller
     public function allTickets()
     {
         $perPage = 10;
-
-
         $tickets = Ticket::latest()->paginate($perPage);
-
         $object_ticket = $tickets->getCollection()->map(function ($ticket) {
             return (object)[
                 "id" => $ticket->id,
@@ -89,14 +87,13 @@ class TicketController extends Controller
     {
 
         $user_sender_ticket = User::where(['company_user_id' => $request->sender_id])->first();
-        $user_receiver_ticket = User::where(['id' =>  $request->receiver_id])->first();
+        $user_receiver_ticket = User::where(['id' => $request->receiver_id])->first();
         $ticket = new Ticket();
         $ticket->sender_id = $user_sender_ticket->id;
         $ticket->receiver_id = $request->receiver_id;
         $ticket->title = $request->title;
         $ticket->code = $this->generateCode();
         $ticket->save();
-
 
 
         if ($request->file) {
@@ -115,6 +112,10 @@ class TicketController extends Controller
             'text' => $request->text,
             'file' => isset($file) ? json_encode($file_info) : null,
         ]);
+
+
+//         $notificationData;
+//        $this->sendNotificationToPanel($user_receiver_ticket->id, $user_receiver_ticket->company_name, $ticket->title);
         return $ticket;
     }
 
@@ -157,6 +158,7 @@ class TicketController extends Controller
     public function getMessages(Request $request)
     {
 //        return ;
+//        return $request->all();
         $ticket = Ticket::where('id', $request['ticket_id'])->first();
         $ticket->messages()->whereNull('read_at')->where('user_id', '!=', auth()->id())->update(['read_at' => now()]);
         return response()->json($ticket->load('messages.user', 'sender', 'receiver'));
@@ -166,8 +168,9 @@ class TicketController extends Controller
     public function chatInTickets(Request $request)
     {
 
-
+//        return $request->all();
         $ticket = Ticket::whereId($request->ticket_id)->first();
+        $user_sender = User::where('company_user_id', $request->sender_id)->first();
 
 
         $ticket->update(['status' => 'pending']);
@@ -191,7 +194,7 @@ class TicketController extends Controller
 
 
         $ticket->messages()->create([
-            'user_id' => $ticket->sender_id,
+            'user_id' => $user_sender->id,
             'text' => $request->text,
             'file' => isset($file) ? json_encode($file_info) : null,
         ]);
@@ -254,7 +257,7 @@ class TicketController extends Controller
     public function editUserToMoshrefi(Request $request)
     {
 //        return $request->all();
-        $user = User::where('company_user_id',$request->company_user_id)->first();
+        $user = User::where('company_user_id', $request->company_user_id)->first();
         $user->company_user_id = $request->company_user_id;
         $user->name = $request->name;
         $user->family = $request->family;
@@ -267,12 +270,49 @@ class TicketController extends Controller
 
     public function deleteUserToMoshrefi(Request $request)
     {
-        $user = User::where('company_user_id',$request->user_id)->first();
+        $user = User::where('company_user_id', $request->user_id)->first();
         $user->delete();
     }
 
+    private function sendNotificationToPanel($id, $company_name, $title)
+    {
+
+        $data = [
+            'user_id' => $id,
+            'url_name' => $company_name,
+            'ticket_title' => $title,
+        ];
+
+        try {
+            $response = Http::timeout(60)->post($this->getPanelUrl($company_name), $data);
+            if ($response->successful()) {
+                return $response->body();
+            } else {
+                return response()->json(['error' => 'Request-failed'], $response->status());
+            }
+        } catch (\Illuminate\Http\Client\RequestException $e) {
+            return response()->json(['error' => 'Request-timed-out-or-failed', 'message' => $e->getMessage()], 500);
+        }
+    }
 
 
+    public function getPanelUrl($input)
+    {
+        $domain = '';
+
+        switch ($input) {
+            case 'parso':
+                $domain = env('PARSO_PANEL_URL') . 'api/send-notification-to-user';
+                break;
+            case 'barman':
+                $domain = env('BARMAN_PANEL_URL') . 'api/send-notification-to-user';
+                break;
+            default:
+                $domain = 'Domain not found';
+        }
+
+        return $domain;
+    }
 
 
 }
