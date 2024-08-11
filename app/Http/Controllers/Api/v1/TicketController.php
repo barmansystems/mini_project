@@ -8,16 +8,16 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Notification;
 
 
 class TicketController extends Controller
 {
     public function myTickets(Request $request)
     {
-//        return $request->All();
+//         $request->All();
         $perPage = 10;
-        $user = User::where('company_user_id', $request->user_id)->first();
-//        return $user;
+        $user = User::where(['company_user_id' => $request->user_id, 'company_name' => $request->company])->first();
         $tickets = Ticket::where('sender_id', $user->id)
             ->orWhere('receiver_id', $user->id)
             ->latest()
@@ -29,7 +29,7 @@ class TicketController extends Controller
                 "id" => $ticket->id,
                 "sender_name" => $ticket->sender->name . ' ' . $ticket->sender->family,
                 "receiver_name" => $ticket->receiver->name . ' ' . $ticket->receiver->family,
-                "company" => $ticket->receiver->company_name,
+                "company_sender" => $ticket->sender->company_name,
                 "title" => $ticket->title,
                 "code" => $ticket->code,
                 "status" => $ticket->status,
@@ -61,7 +61,7 @@ class TicketController extends Controller
                 "id" => $ticket->id,
                 "sender_name" => $ticket->sender->name . ' ' . $ticket->sender->family,
                 "receiver_name" => $ticket->receiver->name . ' ' . $ticket->receiver->family,
-                "company" => $ticket->receiver->company_name,
+                "company_sender" => $ticket->sender->company_name,
                 "title" => $ticket->title,
                 "code" => $ticket->code,
                 "status" => $ticket->status,
@@ -86,7 +86,7 @@ class TicketController extends Controller
     public function createTicket(Request $request)
     {
 
-        $user_sender_ticket = User::where(['company_user_id' => $request->sender_id])->first();
+        $user_sender_ticket = User::where(['company_user_id' => $request->sender_id, 'company_name' => $request->company])->first();
         $user_receiver_ticket = User::where(['id' => $request->receiver_id])->first();
         $ticket = new Ticket();
         $ticket->sender_id = $user_sender_ticket->id;
@@ -113,9 +113,8 @@ class TicketController extends Controller
             'file' => isset($file) ? json_encode($file_info) : null,
         ]);
 
-
-//         $notificationData;
-//        $this->sendNotificationToPanel($user_receiver_ticket->id, $user_receiver_ticket->company_name, $ticket->title);
+        $message = 'تیکتی با عنوان "' . $request->title . '" به شما ارسال شده است';
+        dispatch(new \App\Jobs\SendNotificationJob($user_receiver_ticket->company_user_id, $request->title, $request->company, $message));
         return $ticket;
     }
 
@@ -170,13 +169,15 @@ class TicketController extends Controller
 
 //        return $request->all();
         $ticket = Ticket::whereId($request->ticket_id)->first();
-        $user_sender = User::where('company_user_id', $request->sender_id)->first();
+        $user_sender = User::where(['company_user_id' => $request->auth_user_id, 'company_name' => $request->company])->first();
 
 
         $ticket->update(['status' => 'pending']);
 
         // prevent from send sequence notification
+
         $first_message = $ticket->messages()->orderBy('created_at', 'desc')->first();
+
 
         // end prevent from send sequence notification
 
@@ -198,6 +199,11 @@ class TicketController extends Controller
             'text' => $request->text,
             'file' => isset($file) ? json_encode($file_info) : null,
         ]);
+        if ($first_message != null && $first_message->user_id != $user_sender->id) {
+            $message = 'پاسخی برای تیکت "' . $ticket->title . '" ثبت شده است';
+            $receiver = $user_sender->id == $ticket->sender_id ? $ticket->receiver_id : $ticket->sender_id;
+            dispatch(new \App\Jobs\SendNotificationJob($receiver, $ticket->title, $request->company, $message));
+        }
 
         // log
 
@@ -222,7 +228,7 @@ class TicketController extends Controller
     {
 
         $ticket = Ticket::whereId($request->ticket_id)->first();
-        $user = User::where('company_user_id', $request->user_id)->first();
+        $user = User::where(['company_user_id' => $request->user_id, 'company_name' => $request->company])->first();
         if ($ticket->sender_id == $user->id || $ticket->receiver_id == $user->id) {
             if ($ticket->status == 'closed') {
                 $ticket->update(['status' => 'pending']);
@@ -248,7 +254,7 @@ class TicketController extends Controller
         $user->company_user_id = $request->company_user_id;
         $user->name = $request->name;
         $user->family = $request->family;
-        $user->company_name = $request->company_name;
+        $user->company_name = $request->company;
         $user->role_name = $request->role_name;
         $user->phone = $request->phone;
         $user->save();
@@ -257,11 +263,11 @@ class TicketController extends Controller
     public function editUserToMoshrefi(Request $request)
     {
 //        return $request->all();
-        $user = User::where('company_user_id', $request->company_user_id)->first();
+        $user = User::where(['company_user_id' => $request->company_user_id, 'company_name' => $request->company])->first();
         $user->company_user_id = $request->company_user_id;
         $user->name = $request->name;
         $user->family = $request->family;
-        $user->company_name = $request->company_name;
+        $user->company_name = $request->company;
         $user->role_name = $request->role_name;
         $user->phone = $request->phone;
         $user->save();
@@ -270,49 +276,30 @@ class TicketController extends Controller
 
     public function deleteUserToMoshrefi(Request $request)
     {
-        $user = User::where('company_user_id', $request->user_id)->first();
+        $user = User::where(['company_user_id' => $request->user_id, 'company_name' => $request->company])->first();
         $user->delete();
     }
 
-    private function sendNotificationToPanel($id, $company_name, $title)
-    {
-
-        $data = [
-            'user_id' => $id,
-            'url_name' => $company_name,
-            'ticket_title' => $title,
-        ];
-
-        try {
-            $response = Http::timeout(60)->post($this->getPanelUrl($company_name), $data);
-            if ($response->successful()) {
-                return $response->body();
-            } else {
-                return response()->json(['error' => 'Request-failed'], $response->status());
-            }
-        } catch (\Illuminate\Http\Client\RequestException $e) {
-            return response()->json(['error' => 'Request-timed-out-or-failed', 'message' => $e->getMessage()], 500);
-        }
-    }
-
-
-    public function getPanelUrl($input)
-    {
-        $domain = '';
-
-        switch ($input) {
-            case 'parso':
-                $domain = env('PARSO_PANEL_URL') . 'api/send-notification-to-user';
-                break;
-            case 'barman':
-                $domain = env('BARMAN_PANEL_URL') . 'api/send-notification-to-user';
-                break;
-            default:
-                $domain = 'Domain not found';
-        }
-
-        return $domain;
-    }
+//    private function sendNotificationToPanel($id, $company_name, $title)
+//    {
+//
+//        $data = [
+//            'user_id' => $id,
+//            'url_name' => $company_name,
+//            'ticket_title' => $title,
+//        ];
+//
+//        try {
+//            $response = Http::timeout(60)->post($this->getPanelUrl($company_name), $data);
+//            if ($response->successful()) {
+//                return $response->body();
+//            } else {
+//                return response()->json(['error' => 'Request-failed'], $response->status());
+//            }
+//        } catch (\Illuminate\Http\Client\RequestException $e) {
+//            return response()->json(['error' => 'Request-timed-out-or-failed', 'message' => $e->getMessage()], 500);
+//        }
+//    }
 
 
 }
