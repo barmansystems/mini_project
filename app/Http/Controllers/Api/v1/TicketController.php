@@ -169,7 +169,7 @@ class TicketController extends Controller
 
 //        return $request->all();
         $ticket = Ticket::whereId($request->ticket_id)->first();
-        $user_sender = User::where(['company_user_id' => $request->auth_user_id, 'company_name' => $request->company])->first();
+        $user_sender = User::where(['company_user_id' => $request->sender_id, 'company_name' => $request->company])->first();
 
 
         $ticket->update(['status' => 'pending']);
@@ -189,7 +189,6 @@ class TicketController extends Controller
             ];
 
             $file = $this->upload_file($request->file, 'Messages');
-
             $file_info['path'] = $file;
         }
 
@@ -199,6 +198,7 @@ class TicketController extends Controller
             'text' => $request->text,
             'file' => isset($file) ? json_encode($file_info) : null,
         ]);
+
         if ($first_message != null && $first_message->user_id != $user_sender->id) {
             $message = 'پاسخی برای تیکت "' . $ticket->title . '" ثبت شده است';
             $receiver = $user_sender->id == $ticket->sender_id ? $ticket->receiver_id : $ticket->sender_id;
@@ -206,7 +206,6 @@ class TicketController extends Controller
         }
 
         // log
-
         return response()->json($ticket, 201);
     }
 
@@ -235,7 +234,6 @@ class TicketController extends Controller
             } else {
                 $ticket->update(['status' => 'closed']);
             }
-
             return response()->json([
                 'status' => 'success',
                 'ticket' => $ticket,
@@ -279,27 +277,5 @@ class TicketController extends Controller
         $user = User::where(['company_user_id' => $request->user_id, 'company_name' => $request->company])->first();
         $user->delete();
     }
-
-//    private function sendNotificationToPanel($id, $company_name, $title)
-//    {
-//
-//        $data = [
-//            'user_id' => $id,
-//            'url_name' => $company_name,
-//            'ticket_title' => $title,
-//        ];
-//
-//        try {
-//            $response = Http::timeout(60)->post($this->getPanelUrl($company_name), $data);
-//            if ($response->successful()) {
-//                return $response->body();
-//            } else {
-//                return response()->json(['error' => 'Request-failed'], $response->status());
-//            }
-//        } catch (\Illuminate\Http\Client\RequestException $e) {
-//            return response()->json(['error' => 'Request-timed-out-or-failed', 'message' => $e->getMessage()], 500);
-//        }
-//    }
-
 
 }

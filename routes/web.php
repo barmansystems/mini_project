@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', function () {
+    return "test";
+});
 
 //Route::get('/{id}/{company_name}/{title}', function ($id, $company_name, $title) {
 //
