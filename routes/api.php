@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\v1\TaskController;
 use App\Http\Controllers\Api\v1\TicketController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,13 @@ Route::group(['api_key_auth'], function () {
 
     Route::post('create-ticket', [TicketController::class, 'createTicket']);
     Route::post('get-users', [TicketController::class, 'getUsers']);
+    Route::post('get-all-users', [TaskController::class, 'getAllUsers']);
+    Route::post('show-task', [TaskController::class, 'showTask']);
+    Route::post('change-task-status', [TaskController::class, 'changeTaskStatus']);
+    Route::post('add-task-status', [TaskController::class, 'addTaskStatus']);
+    Route::post('get-task-desc', [TaskController::class, 'getTaskDesc']);
+    Route::post('update-task', [TaskController::class, 'updateTask']);
+    Route::post('delete-task', [TaskController::class, 'deleteTask']);
 
 
     Route::match(['get', 'post'], 'get-messages', [TicketController::class, 'getMessages']);
@@ -34,6 +42,8 @@ Route::group(['api_key_auth'], function () {
     Route::post('add-user', [TicketController::class, 'addUserToMoshrefi']);
     Route::post('edit-user', [TicketController::class, 'editUserToMoshrefi']);
     Route::post('delete-user', [TicketController::class, 'deleteUserToMoshrefi']);
+    Route::match(['get', 'post'], 'get-all-tasks', [TaskController::class, 'index']);
+    Route::post('create-task', [TaskController::class, 'storeTask']);
 
 });
 
