@@ -1,0 +1,181 @@
+# Webalizer V2.23-08 Incremental Data - 08/21/2024 13:05:03
+2024 8 21 13 5 3
+361 277 6 13 5 5 4096490 349 31 0
+1 1 87 12 21
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+200 150 3456248 4 191 7
+6 4 16382 2 6 2
+47 36 178650 3 47 6
+0 0 0 0 0 0
+2 0 3126 1 0 0
+0 0 0 0 0 0
+54 42 229298 4 53 6
+36 31 134489 2 36 4
+9 7 46762 2 9 3
+7 7 31535 1 7 3
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+2 0 3126 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+6 3 12210 5
+49 40 123540 48
+122 85 1871658 120
+115 93 1672124 111
+14 11 215978 12
+9 7 27767 9
+24 24 96717 24
+20 14 73370 20
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0
+0
+0
+277
+39
+0
+0
+24
+0
+0
+0
+0
+0
+0
+10
+0
+0
+0
+0
+0
+2
+5
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+4
+0
+0
+0
+0
+0
+# -urls- 
+/api/get-users
+0 38 0 62870 9 9
+/api/edit-user
+0 20 0 75813 7 5
+/uploads/Messages/2024/8/17239687561.2مرداد.xlsx
+0 1 0 20213 0 0
+/api/create-ticket
+0 5 0 18320 0 0
+/_ignition/health-check
+0 1 0 181 0 0
+/favicon.ico
+0 4 0 332 0 0
+/api/get-messages
+0 117 0 688631 1 6
+/uploads/Messages/2024/8/1723453377_ca664de1-c5b0-47f6-884e-e9f70438876d.jpg
+0 4 0 287836 0 0
+/api/add-user
+0 3 0 10475 1 2
+/api/delete-ticket
+0 7 0 24742 0 0
+/
+0 40 0 25076 1 1
+/api/get-all-tickets
+0 23 0 101800 4 1
+/api/get-my-tickets
+0 24 0 91925 5 2
+# End Of Table - urls
+# -sites- (monthly)
+91.206.178.23
+0 11 6 23192 2 1724070538
+/api/get-users
+78.153.140.224
+0 2 0 3126 0 0
+-
+109.230.83.114
+0 27 14 39162 5 1723979660
+/api/get-users
+193.36.84.21
+0 252 211 3401629 18 1724245503
+/api/edit-user
+45.93.170.154
+0 55 39 481930 3 1724159664
+-
+91.107.137.205
+0 14 7 147451 3 1723980948
+/api/get-users
+# End Of Table - sites (monthly)
+# -sites- (daily)
+193.36.84.21
+0 7 7 31535 3 1724245503
+/api/edit-user
+# End Of Table - sites (daily)
+# -referrers- 
+https://adaktejarat.moshrefiholding.com/
+0 21
+https://app.moshrefiholding.com/uploads/Messages/2024/8/1723453377_ca664de1-c5b0-47f6-884e-e9f70438876d.jpg
+0 2
+- (Direct Request)
+0 303
+https://app.moshrefiholding.com/
+0 4
+https://parso.moshrefiholding.com/
+0 31
+# End Of Table - referrers
+# -agents- 
+Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0
+0 11
+GuzzleHttp/7
+0 258
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36
+0 90
+Mozilla/5.0 (Windows NT 5.1) AppleWebKit/534.57.2 (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2
+0 1
+Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3 (.NET CLR 3.5.30729)
+0 1
+# End Of Table - agents
+# -search strings- 
+# End Of Table - search strings
+# -usernames- 
+# End Of Table - usernames

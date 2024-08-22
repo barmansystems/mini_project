@@ -81,11 +81,16 @@ class TaskController extends Controller
 
     public function showTask(Request $request)
     {
+        $user = User::where(['company_user_id' => $request->user_id, 'company_name' => $request->company_name])->first();
+//        return  $user;
+
         $task = Task::with('users')->findOrFail($request->task_id);
-        $task_etc = DB::table('task_user')->where(['task_id' => $task->id, 'user_id' => $request->user_id])->first();
+        $task_etc = DB::table('task_user')->where(['task_id' => $task->id, 'user_id' => $user->id])->first();
         $res = [
             'task' => $task,
             'task_user' => $task_etc,
+            'company_auth_id' => $request->user_id,
+
         ];
 
         return response()->json($res);
