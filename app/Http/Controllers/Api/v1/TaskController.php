@@ -81,8 +81,9 @@ class TaskController extends Controller
 
     public function showTask(Request $request)
     {
+
         $user = User::where(['company_user_id' => $request->user_id, 'company_name' => $request->company_name])->first();
-//        return  $user;
+
 
         $task = Task::with('users')->findOrFail($request->task_id);
         $task_etc = DB::table('task_user')->where(['task_id' => $task->id, 'user_id' => $user->id])->first();
@@ -90,7 +91,6 @@ class TaskController extends Controller
             'task' => $task,
             'task_user' => $task_etc,
             'company_auth_id' => $request->user_id,
-
         ];
 
         return response()->json($res);
@@ -99,7 +99,10 @@ class TaskController extends Controller
 
     public function changeTaskStatus(Request $request)
     {
-        $task = DB::table('task_user')->where(['task_id' => $request->task_id, 'user_id' => $request->user_id]);
+
+        $user = User::where(['company_user_id' => $request->user_id, 'company_name' => $request->company_name])->first();
+//        return $user;
+        $task = DB::table('task_user')->where(['task_id' => $request->task_id, 'user_id' => $user->id]);
 
         if ($task->first()->status == 'done') {
             $task_status = 'doing';
@@ -120,6 +123,7 @@ class TaskController extends Controller
     {
 //        return $request->all();
         $authUser = User::where(['company_user_id' => $request->user_id, 'company_name' => $request->company_name])->first();
+        return $authUser;
         $task = DB::table('task_user')->where(['task_id' => $request->task_id, 'user_id' => $authUser->id]);
         $task->update(['description' => $request->description]);
         return "success";

@@ -1,7 +1,7 @@
-# Webalizer V2.23-08 Incremental Data - 08/21/2024 13:05:03
-2024 8 21 13 5 3
-361 277 6 13 5 5 4096490 349 31 0
-1 1 87 12 21
+# Webalizer V2.23-08 Incremental Data - 08/22/2024 13:58:36
+2024 8 22 13 58 36
+536 426 7 20 5 6 17852768 524 34 0
+3 76 99 12 22
 0 0 0 0 0 0
 0 0 0 0 0 0
 0 0 0 0 0 0
@@ -23,7 +23,7 @@
 36 31 134489 2 36 4
 9 7 46762 2 9 3
 7 7 31535 1 7 3
-0 0 0 0 0 0
+175 149 13756278 3 175 3
 0 0 0 0 0 0
 0 0 0 0 0 0
 0 0 0 0 0 0
@@ -45,8 +45,8 @@
 6 3 12210 5
 49 40 123540 48
 122 85 1871658 120
-115 93 1672124 111
-14 11 215978 12
+214 180 6461619 210
+90 73 9182761 88
 9 7 27767 9
 24 24 96717 24
 20 14 73370 20
@@ -60,11 +60,11 @@
 0
 0
 0
-277
+426
 39
 0
 0
-24
+34
 0
 0
 0
@@ -78,7 +78,7 @@
 0
 0
 2
-5
+9
 0
 0
 0
@@ -92,7 +92,7 @@
 0
 0
 0
-4
+16
 0
 0
 0
@@ -102,7 +102,13 @@
 /api/get-users
 0 38 0 62870 9 9
 /api/edit-user
-0 20 0 75813 7 5
+0 20 0 75813 7 6
+/api/delete-task
+0 2 0 7632 0 0
+/api/create-task
+0 6 0 21205 0 0
+/api/change-task-status
+0 6 0 21596 0 0
 /uploads/Messages/2024/8/17239687561.2مرداد.xlsx
 0 1 0 20213 0 0
 /api/create-ticket
@@ -111,20 +117,28 @@
 0 1 0 181 0 0
 /favicon.ico
 0 4 0 332 0 0
+/api/show-task
+0 92 0 439121 0 0
 /api/get-messages
 0 117 0 688631 1 6
 /uploads/Messages/2024/8/1723453377_ca664de1-c5b0-47f6-884e-e9f70438876d.jpg
 0 4 0 287836 0 0
 /api/add-user
 0 3 0 10475 1 2
+/api/update-task
+0 2 0 7068 0 0
 /api/delete-ticket
 0 7 0 24742 0 0
 /
-0 40 0 25076 1 1
+0 42 0 27590 2 1
 /api/get-all-tickets
 0 23 0 101800 4 1
+/api/get-all-tasks
+0 29 0 112658 0 0
 /api/get-my-tickets
 0 24 0 91925 5 2
+/api/get-all-users
+0 10 0 7088 0 0
 # End Of Table - urls
 # -sites- (monthly)
 91.206.178.23
@@ -137,19 +151,28 @@
 0 27 14 39162 5 1723979660
 /api/get-users
 193.36.84.21
-0 252 211 3401629 18 1724245503
-/api/edit-user
+0 405 348 17146280 19 1724335116
+/api/show-task
 45.93.170.154
-0 55 39 481930 3 1724159664
--
+0 75 49 491043 4 1724332380
+/api/get-all-users
 91.107.137.205
 0 14 7 147451 3 1723980948
 /api/get-users
+35.195.25.18
+0 2 2 2514 1 1724331690
+/
 # End Of Table - sites (monthly)
 # -sites- (daily)
 193.36.84.21
-0 7 7 31535 3 1724245503
-/api/edit-user
+0 153 137 13744651 1 1724335116
+/api/show-task
+45.93.170.154
+0 20 10 9113 1 1724332380
+/api/get-all-users
+35.195.25.18
+0 2 2 2514 1 1724331690
+/
 # End Of Table - sites (daily)
 # -referrers- 
 https://adaktejarat.moshrefiholding.com/
@@ -157,21 +180,23 @@ https://adaktejarat.moshrefiholding.com/
 https://app.moshrefiholding.com/uploads/Messages/2024/8/1723453377_ca664de1-c5b0-47f6-884e-e9f70438876d.jpg
 0 2
 - (Direct Request)
-0 303
+0 458
 https://app.moshrefiholding.com/
 0 4
 https://parso.moshrefiholding.com/
-0 31
+0 51
 # End Of Table - referrers
 # -agents- 
 Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0
 0 11
 GuzzleHttp/7
-0 258
+0 411
 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36
-0 90
+0 110
 Mozilla/5.0 (Windows NT 5.1) AppleWebKit/534.57.2 (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2
 0 1
+python-requests/2.32.2
+0 2
 Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3 (.NET CLR 3.5.30729)
 0 1
 # End Of Table - agents
