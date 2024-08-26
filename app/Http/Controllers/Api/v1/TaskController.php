@@ -67,6 +67,7 @@ class TaskController extends Controller
         ]);
 //
         $this->assignTask($task, $request->users);
+        $this->sendNotificationToUser($request->users);
 //
         return "success";
 
@@ -82,15 +83,26 @@ class TaskController extends Controller
     public function showTask(Request $request)
     {
 
-        $user = User::where(['company_user_id' => $request->user_id, 'company_name' => $request->company_name])->first();
+//        return $request->all();
+        //user when login
+        $user = User::where(['company_user_id' => $request->auth_id, 'company_name' => $request->company_name])->first();
 
+        //get task
+//        return $user;
 
         $task = Task::with('users')->findOrFail($request->task_id);
+        //get creator
+
+        $creator = User::whereId($task->creator_id)->first();
+//        return $creator_user;
+
+
         $task_etc = DB::table('task_user')->where(['task_id' => $task->id, 'user_id' => $user->id])->first();
         $res = [
             'task' => $task,
             'task_user' => $task_etc,
-            'company_auth_id' => $request->user_id,
+            'auth_user' => $user,
+            'creator' => $creator,
         ];
 
         return response()->json($res);
@@ -123,7 +135,6 @@ class TaskController extends Controller
     {
 //        return $request->all();
         $authUser = User::where(['company_user_id' => $request->user_id, 'company_name' => $request->company_name])->first();
-        return $authUser;
         $task = DB::table('task_user')->where(['task_id' => $request->task_id, 'user_id' => $authUser->id]);
         $task->update(['description' => $request->description]);
         return "success";
@@ -167,6 +178,17 @@ class TaskController extends Controller
     private function assignTask(Task $task, $users)
     {
         $task->users()->sync($users);
+    }
+
+
+    private function sendNotificationToUser($users)
+    {
+        $allUser = User::whereIn('id', $users)->get();
+        foreach ($allUser as $user) {
+            $message = 'یک وظیفه جدید برای شما ارسال شده است.';
+            dispatch(new \App\Jobs\SendNotificationJob($user->company_user_id, $user->company_name, $message));
+        }
+        return True;
     }
 
 }

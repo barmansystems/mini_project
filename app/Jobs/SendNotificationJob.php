@@ -17,14 +17,12 @@ class SendNotificationJob implements ShouldQueue
      * Create a new job instance.
      */
     protected $user_id;
-    protected $ticket_title;
     protected $company_name;
     protected $message;
 
-    public function __construct($user_id, $ticket_title, $company_name, $message)
+    public function __construct($user_id, $company_name, $message)
     {
         $this->user_id = $user_id;
-        $this->ticket_title = $ticket_title;
         $this->company_name = $company_name;
         $this->message = $message;
     }
@@ -34,17 +32,16 @@ class SendNotificationJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $this->sendNotificationToPanel($this->user_id, $this->ticket_title, $this->company_name, $this->message);
+        $this->sendNotificationToPanel($this->user_id, $this->company_name, $this->message);
     }
 
-    private function sendNotificationToPanel($id, $title, $company_name,$message)
+    private function sendNotificationToPanel($id, $company_name,$message)
     {
         $data = [
             'user_id' => $id,
-            'url_name' => $company_name,
-            'ticket_title' => $title,
             'message' => $message,
         ];
+//        dd($this->getPanelUrl($company_name));
         try {
             $response = Http::timeout(60)->post($this->getPanelUrl($company_name), $data);
             if ($response->successful()) {
@@ -59,9 +56,8 @@ class SendNotificationJob implements ShouldQueue
 
     public function getPanelUrl($input)
     {
+
         $domain = '';
-
-
         switch ($input) {
             case "parso":
                 $domain = env('PARSO_PANEL_URL') . 'api/send-notification-to-user';

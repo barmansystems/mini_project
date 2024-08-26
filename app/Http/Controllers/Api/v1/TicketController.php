@@ -114,7 +114,7 @@ class TicketController extends Controller
         ]);
 
         $message = 'تیکتی با عنوان "' . $request->title . '" به شما ارسال شده است';
-        dispatch(new \App\Jobs\SendNotificationJob($user_receiver_ticket->company_user_id, $request->title, $request->company, $message));
+        dispatch(new \App\Jobs\SendNotificationJob($user_receiver_ticket->company_user_id, $request->company, $message));
         return $ticket;
     }
 
@@ -202,7 +202,7 @@ class TicketController extends Controller
         if ($first_message != null && $first_message->user_id != $user_sender->id) {
             $message = 'پاسخی برای تیکت "' . $ticket->title . '" ثبت شده است';
             $receiver = $user_sender->id == $ticket->sender_id ? $ticket->receiver_id : $ticket->sender_id;
-            dispatch(new \App\Jobs\SendNotificationJob($receiver, $ticket->title, $request->company, $message));
+            dispatch(new \App\Jobs\SendNotificationJob($receiver, $request->company, $message));
         }
 
         // log

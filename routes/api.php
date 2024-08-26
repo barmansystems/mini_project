@@ -25,6 +25,7 @@ Route::group(['api_key_auth'], function () {
     Route::match(['get', 'post'], 'get-my-tickets', [TicketController::class, 'myTickets']);
 
     Route::post('create-ticket', [TicketController::class, 'createTicket']);
+
     Route::post('get-users', [TicketController::class, 'getUsers']);
     Route::post('get-all-users', [TaskController::class, 'getAllUsers']);
     Route::post('show-task', [TaskController::class, 'showTask']);
@@ -33,7 +34,9 @@ Route::group(['api_key_auth'], function () {
     Route::post('get-task-desc', [TaskController::class, 'getTaskDesc']);
     Route::post('update-task', [TaskController::class, 'updateTask']);
     Route::post('delete-task', [TaskController::class, 'deleteTask']);
-
+    Route::post('add-task-desc', [TaskController::class, 'addTaskDesc']);
+    Route::post('create-task', [TaskController::class, 'storeTask']);
+    Route::match(['get', 'post'], 'get-all-tasks', [TaskController::class, 'index']);
 
     Route::match(['get', 'post'], 'get-messages', [TicketController::class, 'getMessages']);
     Route::match(['get', 'post'], 'chat-in-tickets', [TicketController::class, 'chatInTickets']);
@@ -42,8 +45,8 @@ Route::group(['api_key_auth'], function () {
     Route::post('add-user', [TicketController::class, 'addUserToMoshrefi']);
     Route::post('edit-user', [TicketController::class, 'editUserToMoshrefi']);
     Route::post('delete-user', [TicketController::class, 'deleteUserToMoshrefi']);
-    Route::match(['get', 'post'], 'get-all-tasks', [TaskController::class, 'index']);
-    Route::post('create-task', [TaskController::class, 'storeTask']);
+
+
 
 });
 
