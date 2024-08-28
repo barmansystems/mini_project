@@ -11,7 +11,7 @@
 
   // Cached vars
   var _iCheck = 'iCheck',
-    _iCheckHelper = _iCheck + '-helper',
+    _iCheckHelper = _iCheck + '-Helper',
     _checkbox = 'checkbox',
     _radio = 'radio',
     _checked = 'checked',
@@ -151,7 +151,7 @@
           // Set ARIA placeholder
           ariaID = _iCheck + '-' + Math.random().toString(36).replace('0.', ''),
 
-          // Parent & helper
+          // Parent & Helper
           parent = '<div class="' + className + '" ' + (aria ? 'role="' + node[_type] + '" ' : ''),
           helper;
 

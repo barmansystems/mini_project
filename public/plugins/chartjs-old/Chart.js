@@ -2767,7 +2767,7 @@
 
 			var ctx = this.chart.ctx;
 
-			// Some helper methods for getting the next/prev points
+			// Some Helper methods for getting the next/prev points
 			var hasValue = function(item){
 				return item.value !== null;
 			},
@@ -3079,7 +3079,7 @@
 			helpers.each(this.segments,function(segment){
 				segment.save();
 			});
-			
+
 			this.reflow();
 			this.render();
 		},

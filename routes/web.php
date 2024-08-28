@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Home\TaskController;
+use App\Http\Controllers\Home\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +25,10 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/login', [AuthController::class, 'loginPage'])->middleware('guest')->name('login');
 Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
+
+
+Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
 
 Route::get('/test/{id}', function ($id) {
     return auth()->loginUsingId($id);

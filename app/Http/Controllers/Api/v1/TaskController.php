@@ -24,10 +24,12 @@ class TaskController extends Controller
             ->paginate($perPage);
 
 
-        $object_tasks = $tasks->getCollection()->map(function ($task) {
+        $object_tasks = $tasks->getCollection()->map(function ($task) use ($userId) {
+            $status = DB::table('task_user')->where(['task_id' => $task->id, 'user_id' => $userId])->first()->status ?? null;
             return (object)[
                 "id" => $task->id,
                 "creator" => $task->creator->name . ' ' . $task->creator->family,
+                "status" => $status,
                 "creator_id" => $task->creator->company_user_id,
                 "title" => $task->title,
                 "start_at" => $task->start_at,

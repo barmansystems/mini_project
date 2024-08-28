@@ -36,9 +36,9 @@
 
 	weekNumberTitle: 'W',
 	weekNumberCalculation: 'local',
-	
+
 	//editable: false,
-	
+
 	// event ajax
 	lazyFetching: true,
 	startParam: 'start',
@@ -68,7 +68,7 @@
 		prevYear: 'left-double-arrow',
 		nextYear: 'right-double-arrow'
 	},
-	
+
 	// jquery-ui theming
 	theme: false,
 	themeButtonIcons: {
@@ -81,20 +81,20 @@
 	dragOpacity: .75,
 	dragRevertDuration: 500,
 	dragScroll: true,
-	
+
 	//selectable: false,
 	unselectAuto: true,
-	
+
 	dropAccept: '*',
 
 	eventLimit: false,
 	eventLimitText: 'more',
 	eventLimitClick: 'popover',
 	dayPopoverFormat: 'LL',
-	
+
 	handleWindowResize: true,
 	windowResizeDelay: 200 // milliseconds before an updateSize happens
-	
+
 };
 
 
@@ -156,7 +156,7 @@ $.fn.fullCalendar = function(options) {
 			calendar.render();
 		}
 	});
-	
+
 	return res;
 };
 
@@ -404,7 +404,7 @@ function enableCursor() {
 
 // Given a total available height to fill, have `els` (essentially child rows) expand to accomodate.
 // By default, all elements that are shorter than the recommended height are expanded uniformly, not considering
-// any other els that are already too tall. if `shouldRedistribute` is on, it considers these tall rows and 
+// any other els that are already too tall. if `shouldRedistribute` is on, it considers these tall rows and
 // reduces the available height.
 function distributeHeight(els, availableHeight, shouldRedistribute) {
 
@@ -2481,7 +2481,7 @@ var MouseFollower = Class.extend({
     /* A utility class for rendering <tr> rows.
 ----------------------------------------------------------------------------------------------------------------------*/
 // It leverages methods of the subclass and the View to determine custom rendering behavior for each row "type"
-// (such as highlight rows, day rows, helper rows, etc).
+// (such as highlight rows, day rows, Helper rows, etc).
 
 var RowRenderer = Class.extend({
 
@@ -2909,7 +2909,7 @@ var Grid = fc.Grid = RowRenderer.extend({
 		this.view.calendar.normalizeEventDateProps(fakeEvent);
 
 		// this extra className will be useful for differentiating real events from mock events in CSS
-		fakeEvent.className = (fakeEvent.className || []).concat('fc-helper');
+		fakeEvent.className = (fakeEvent.className || []).concat('fc-Helper');
 
 		// if something external is being dragged in, don't render a resizer
 		if (!sourceSeg) {
@@ -3445,7 +3445,7 @@ Grid.mixin({
 				dropLocation = _this.computeEventDrop(origCell, cell, event);
 				if (dropLocation) {
 					if (view.renderDrag(dropLocation, seg)) { // have the subclass render a visual indication
-						mouseFollower.hide(); // if the subclass is already using a mock event "helper", hide our own
+						mouseFollower.hide(); // if the subclass is already using a mock event "Helper", hide our own
 					}
 					else {
 						mouseFollower.show();
@@ -3455,7 +3455,7 @@ Grid.mixin({
 					}
 				}
 				else {
-					// have the helper follow the mouse (no snapping) with a warning-style cursor
+					// have the Helper follow the mouse (no snapping) with a warning-style cursor
 					mouseFollower.show();
 					disableCursor();
 				}
@@ -3630,7 +3630,7 @@ Grid.mixin({
 	// Renders a visual indication of an event or external element being dragged.
 	// `dropLocation` contains hypothetical start/end/allDay values the event would have if dropped. end can be null.
 	// `seg` is the internal segment object that is being dragged. If dragging an external element, `seg` is null.
-	// A truthy returned value indicates this method has rendered a helper element.
+	// A truthy returned value indicates this method has rendered a Helper element.
 	renderDrag: function(dropLocation, seg) {
 		// subclasses must implement
 	},
@@ -4071,7 +4071,7 @@ var DayGrid = Grid.extend({
 
 	rowEls: null, // set of fake row elements
 	dayEls: null, // set of whole-day elements comprising the row's background
-	helperEls: null, // set of cell skeleton elements for rendering the mock event "helper"
+	helperEls: null, // set of cell skeleton elements for rendering the mock event "Helper"
 
 
 	// Renders the rows and columns into the component's `this.el`, which should already be assigned.
@@ -4373,7 +4373,7 @@ var DayGrid = Grid.extend({
 			this.view.calendar.ensureVisibleEventRange(dropLocation) // needs to be a proper range
 		);
 
-		// if a segment from the same calendar but another component is being dragged, render a helper event
+		// if a segment from the same calendar but another component is being dragged, render a Helper event
 		if (seg && !seg.el.closest(this.el).length) {
 
 			this.renderRangeHelper(dropLocation, seg);
@@ -4383,7 +4383,7 @@ var DayGrid = Grid.extend({
 				this.helperEls.css('opacity', opacity);
 			}
 
-			return true; // a helper has been rendered
+			return true; // a Helper has been rendered
 		}
 	},
 
@@ -4417,7 +4417,7 @@ var DayGrid = Grid.extend({
 	------------------------------------------------------------------------------------------------------------------*/
 
 
-	// Renders a mock "helper" event. `sourceSeg` is the associated internal segment object. It can be null.
+	// Renders a mock "Helper" event. `sourceSeg` is the associated internal segment object. It can be null.
 	renderHelper: function(event, sourceSeg) {
 		var helperNodes = [];
 		var segs = this.eventsToSegs([ event ]);
@@ -4429,7 +4429,7 @@ var DayGrid = Grid.extend({
 		// inject each new event skeleton into each associated row
 		this.rowEls.each(function(row, rowNode) {
 			var rowEl = $(rowNode); // the .fc-row
-			var skeletonEl = $('<div class="fc-helper-skeleton"><table/></div>'); // will be absolutely positioned
+			var skeletonEl = $('<div class="fc-Helper-skeleton"><table/></div>'); // will be absolutely positioned
 			var skeletonTop;
 
 			// If there is an original segment, match the top position. Otherwise, put it at the row's top level
@@ -4452,7 +4452,7 @@ var DayGrid = Grid.extend({
 	},
 
 
-	// Unrenders any visual indication of a mock helper event
+	// Unrenders any visual indication of a mock Helper event
 	destroyHelper: function() {
 		if (this.helperEls) {
 			this.helperEls.remove();
@@ -4635,7 +4635,7 @@ DayGrid.mixin({
 			'<span class="fc-title">' +
 				(htmlEscape(event.title || '') || '&nbsp;') + // we always want one line of height
 			'</span>';
-		
+
 		return '<a class="' + classes.join(' ') + '"' +
 				(event.url ?
 					' href="' + htmlEscape(event.url) + '"' :
@@ -4758,7 +4758,7 @@ DayGrid.mixin({
 		// Give preference to elements with certain criteria, so they have
 		// a chance to be closer to the top.
 		segs.sort(compareSegs);
-		
+
 		for (i = 0; i < segs.length; i++) {
 			seg = segs[i];
 
@@ -5198,7 +5198,7 @@ var TimeGrid = Grid.extend({
 
 	slatTops: null, // an array of top positions, relative to the container. last item holds bottom of last slot
 
-	helperEl: null, // cell skeleton element for rendering the mock event "helper"
+	helperEl: null, // cell skeleton element for rendering the mock event "Helper"
 
 	businessHourSegs: null,
 
@@ -5517,11 +5517,11 @@ var TimeGrid = Grid.extend({
 
 	// Renders a visual indication of an event being dragged over the specified date(s).
 	// dropLocation's end might be null, as well as `seg`. See Grid::renderDrag for more info.
-	// A returned value of `true` signals that a mock "helper" event has been rendered.
+	// A returned value of `true` signals that a mock "Helper" event has been rendered.
 	renderDrag: function(dropLocation, seg) {
 		var opacity;
 
-		if (seg) { // if there is event information for this drag, render a helper event
+		if (seg) { // if there is event information for this drag, render a Helper event
 			this.renderRangeHelper(dropLocation, seg);
 
 			opacity = this.view.opt('dragOpacity');
@@ -5529,7 +5529,7 @@ var TimeGrid = Grid.extend({
 				this.helperEl.css('opacity', opacity);
 			}
 
-			return true; // signal that a helper has been rendered
+			return true; // signal that a Helper has been rendered
 		}
 		else {
 			// otherwise, just render a highlight
@@ -5567,7 +5567,7 @@ var TimeGrid = Grid.extend({
 	------------------------------------------------------------------------------------------------------------------*/
 
 
-	// Renders a mock "helper" event. `sourceSeg` is the original segment object and might be null (an external drag)
+	// Renders a mock "Helper" event. `sourceSeg` is the original segment object and might be null (an external drag)
 	renderHelper: function(event, sourceSeg) {
 		var segs = this.eventsToSegs([ event ]);
 		var tableEl;
@@ -5591,13 +5591,13 @@ var TimeGrid = Grid.extend({
 			}
 		}
 
-		this.helperEl = $('<div class="fc-helper-skeleton"/>')
+		this.helperEl = $('<div class="fc-Helper-skeleton"/>')
 			.append(tableEl)
 				.appendTo(this.el);
 	},
 
 
-	// Unrenders any mock helper event
+	// Unrenders any mock Helper event
 	destroyHelper: function() {
 		if (this.helperEl) {
 			this.helperEl.remove();
@@ -5612,7 +5612,7 @@ var TimeGrid = Grid.extend({
 
 	// Renders a visual indication of a selection. Overrides the default, which was to simply render a highlight.
 	renderSelection: function(range) {
-		if (this.view.opt('selectHelper')) { // this setting signals that a mock helper event should be rendered
+		if (this.view.opt('selectHelper')) { // this setting signals that a mock Helper event should be rendered
 			this.renderRangeHelper(range);
 		}
 		else {
@@ -6853,7 +6853,7 @@ var View = fc.View = Class.extend({
 	}
 
 
-	
+
 	// Exports
 	// -----------------------------------------------------------------------------------
 
@@ -7033,7 +7033,7 @@ var View = fc.View = Class.extend({
 	}
 
 
-	
+
 	// Imports
 	// -----------------------------------------------------------------------------------
 
@@ -7060,9 +7060,9 @@ var View = fc.View = Class.extend({
 	var ignoreWindowResize = 0;
 	var date;
 	var events = [];
-	
-	
-	
+
+
+
 	// Main Rendering
 	// -----------------------------------------------------------------------------------
 
@@ -7073,8 +7073,8 @@ var View = fc.View = Class.extend({
 	else {
 		date = t.getNow();
 	}
-	
-	
+
+
 	function render(inc) {
 		if (!content) {
 			initialRender();
@@ -7085,8 +7085,8 @@ var View = fc.View = Class.extend({
 			renderView(inc);
 		}
 	}
-	
-	
+
+
 	function initialRender() {
 		tm = options.theme ? 'ui' : 'fc';
 		element.addClass('fc');
@@ -7120,8 +7120,8 @@ var View = fc.View = Class.extend({
 			$(window).resize(windowResizeProxy);
 		}
 	}
-	
-	
+
+
 	function destroy() {
 
 		if (currentView) {
@@ -7134,13 +7134,13 @@ var View = fc.View = Class.extend({
 
 		$(window).unbind('resize', windowResizeProxy);
 	}
-	
-	
+
+
 	function elementVisible() {
 		return element.is(':visible');
 	}
-	
-	
+
+
 
 	// View Rendering
 	// -----------------------------------------------------------------------------------
@@ -7311,8 +7311,8 @@ var View = fc.View = Class.extend({
 			return spec.buttonText;
 		}
 	}
-	
-	
+
+
 
 	// Resizing
 	// -----------------------------------------------------------------------------------
@@ -7329,8 +7329,8 @@ var View = fc.View = Class.extend({
 	t.isHeightAuto = function() {
 		return options.contentHeight === 'auto' || options.height === 'auto';
 	};
-	
-	
+
+
 	function updateSize(shouldRecalc) {
 		if (elementVisible()) {
 
@@ -7352,8 +7352,8 @@ var View = fc.View = Class.extend({
 			_calcSize();
 		}
 	}
-	
-	
+
+
 	function _calcSize() { // assumes elementVisible
 		if (typeof options.contentHeight === 'number') { // exists and not 'auto'
 			suggestedViewHeight = options.contentHeight;
@@ -7365,8 +7365,8 @@ var View = fc.View = Class.extend({
 			suggestedViewHeight = Math.round(content.width() / Math.max(options.aspectRatio, .5));
 		}
 	}
-	
-	
+
+
 	function windowResize(ev) {
 		if (
 			!ignoreWindowResize &&
@@ -7378,9 +7378,9 @@ var View = fc.View = Class.extend({
 			}
 		}
 	}
-	
-	
-	
+
+
+
 	/* Event Fetching/Rendering
 	-----------------------------------------------------------------------------*/
 	// TODO: going forward, most of this stuff should be directly handled by the view
@@ -7407,7 +7407,7 @@ var View = fc.View = Class.extend({
 		currentView.destroyViewEvents();
 		unfreezeContentHeight();
 	}
-	
+
 
 	function getAndRenderEvents() {
 		if (!options.lazyFetching || isFetchNeeded(currentView.start, currentView.end)) {
@@ -7425,7 +7425,7 @@ var View = fc.View = Class.extend({
 			// ... which will call renderEvents
 	}
 
-	
+
 	// called when event data arrives
 	function reportEvents(_events) {
 		events = _events;
@@ -7458,12 +7458,12 @@ var View = fc.View = Class.extend({
 			header.enableButton('today');
 		}
 	}
-	
+
 
 
 	/* Selection
 	-----------------------------------------------------------------------------*/
-	
+
 
 	function select(start, end) {
 
@@ -7480,54 +7480,54 @@ var View = fc.View = Class.extend({
 
 		currentView.select({ start: start, end: end }); // accepts a range
 	}
-	
+
 
 	function unselect() { // safe to be called before renderView
 		if (currentView) {
 			currentView.unselect();
 		}
 	}
-	
-	
-	
+
+
+
 	/* Date
 	-----------------------------------------------------------------------------*/
-	
-	
+
+
 	function prev() {
 		renderView(-1);
 	}
-	
-	
+
+
 	function next() {
 		renderView(1);
 	}
-	
-	
+
+
 	function prevYear() {
 		date.add(-1, 'years');
 		renderView();
 	}
-	
-	
+
+
 	function nextYear() {
 		date.add(1, 'years');
 		renderView();
 	}
-	
-	
+
+
 	function today() {
 		date = t.getNow();
 		renderView();
 	}
-	
-	
+
+
 	function gotoDate(dateInput) {
 		date = t.moment(dateInput);
 		renderView();
 	}
-	
-	
+
+
 	function incrementDate(delta) {
 		date.add(moment.duration(delta));
 		renderView();
@@ -7558,8 +7558,8 @@ var View = fc.View = Class.extend({
 		date = newDate;
 		changeView(viewType);
 	}
-	
-	
+
+
 	function getDate() {
 		return date.clone();
 	}
@@ -7586,23 +7586,23 @@ var View = fc.View = Class.extend({
 			overflow: ''
 		});
 	}
-	
-	
-	
+
+
+
 	/* Misc
 	-----------------------------------------------------------------------------*/
-	
+
 
 	function getCalendar() {
 		return t;
 	}
 
-	
+
 	function getView() {
 		return currentView;
 	}
-	
-	
+
+
 	function option(name, value) {
 		if (value === undefined) {
 			return options[name];
@@ -7612,8 +7612,8 @@ var View = fc.View = Class.extend({
 			updateSize(true); // true = allow recalculation of height
 		}
 	}
-	
-	
+
+
 	function trigger(name, thisObj) {
 		if (options[name]) {
 			return options[name].apply(
@@ -7631,7 +7631,7 @@ var View = fc.View = Class.extend({
 
 function Header(calendar, options) {
 	var t = this;
-	
+
 	// exports
 	t.render = render;
 	t.destroy = destroy;
@@ -7641,7 +7641,7 @@ function Header(calendar, options) {
 	t.disableButton = disableButton;
 	t.enableButton = enableButton;
 	t.getViewsWithButtons = getViewsWithButtons;
-	
+
 	// locals
 	var el = $();
 	var viewsWithButtons = [];
@@ -7663,13 +7663,13 @@ function Header(calendar, options) {
 			return el;
 		}
 	}
-	
-	
+
+
 	function destroy() {
 		el.remove();
 	}
-	
-	
+
+
 	function renderSection(position) {
 		var sectionEl = $('<div class="fc-' + position + '"/>');
 		var buttonStr = options.header[position];
@@ -7812,32 +7812,32 @@ function Header(calendar, options) {
 
 		return sectionEl;
 	}
-	
-	
+
+
 	function updateTitle(text) {
 		el.find('h2').text(text);
 	}
-	
-	
+
+
 	function activateButton(buttonName) {
 		el.find('.fc-' + buttonName + '-button')
 			.addClass(tm + '-state-active');
 	}
-	
-	
+
+
 	function deactivateButton(buttonName) {
 		el.find('.fc-' + buttonName + '-button')
 			.removeClass(tm + '-state-active');
 	}
-	
-	
+
+
 	function disableButton(buttonName) {
 		el.find('.fc-' + buttonName + '-button')
 			.attr('disabled', 'disabled')
 			.addClass(tm + '-state-disabled');
 	}
-	
-	
+
+
 	function enableButton(buttonName) {
 		el.find('.fc-' + buttonName + '-button')
 			.removeAttr('disabled')
@@ -7864,8 +7864,8 @@ var eventGUID = 1;
 
 function EventManager(options) { // assumed to be a calendar
 	var t = this;
-	
-	
+
+
 	// exports
 	t.isFetchNeeded = isFetchNeeded;
 	t.fetchEvents = fetchEvents;
@@ -7878,14 +7878,14 @@ function EventManager(options) { // assumed to be a calendar
 	t.mutateEvent = mutateEvent;
 	t.normalizeEventDateProps = normalizeEventDateProps;
 	t.ensureVisibleEventRange = ensureVisibleEventRange;
-	
-	
+
+
 	// imports
 	var trigger = t.trigger;
 	var getView = t.getView;
 	var reportEvents = t.reportEvents;
-	
-	
+
+
 	// locals
 	var stickySource = { events: [] };
 	var sources = [ stickySource ];
@@ -7905,21 +7905,21 @@ function EventManager(options) { // assumed to be a calendar
 			}
 		}
 	);
-	
-	
-	
+
+
+
 	/* Fetching
 	-----------------------------------------------------------------------------*/
-	
-	
+
+
 	function isFetchNeeded(start, end) {
 		return !rangeStart || // nothing has been fetched yet?
 			// or, a part of the new range is outside of the old range? (after normalizing)
 			start.clone().stripZone() < rangeStart.clone().stripZone() ||
 			end.clone().stripZone() > rangeEnd.clone().stripZone();
 	}
-	
-	
+
+
 	function fetchEvents(start, end) {
 		rangeStart = start;
 		rangeEnd = end;
@@ -7931,8 +7931,8 @@ function EventManager(options) { // assumed to be a calendar
 			fetchEventSource(sources[i], fetchID);
 		}
 	}
-	
-	
+
+
 	function fetchEventSource(source, fetchID) {
 		_fetchEventSource(source, function(eventInputs) {
 			var isArraySource = $.isArray(source.events);
@@ -7968,8 +7968,8 @@ function EventManager(options) { // assumed to be a calendar
 			}
 		});
 	}
-	
-	
+
+
 	function _fetchEventSource(source, callback) {
 		var i;
 		var fetchers = fc.sourceFetchers;
@@ -8078,12 +8078,12 @@ function EventManager(options) { // assumed to be a calendar
 			}
 		}
 	}
-	
-	
-	
+
+
+
 	/* Sources
 	-----------------------------------------------------------------------------*/
-	
+
 
 	function addEventSource(sourceInput) {
 		var source = buildEventSource(sourceInput);
@@ -8165,9 +8165,9 @@ function EventManager(options) { // assumed to be a calendar
 		) ||
 		source; // the given argument *is* the primitive
 	}
-	
-	
-	
+
+
+
 	/* Manipulation
 	-----------------------------------------------------------------------------*/
 
@@ -8209,7 +8209,7 @@ function EventManager(options) { // assumed to be a calendar
 		return !/^_|^(id|allDay|start|end)$/.test(name);
 	}
 
-	
+
 	// returns the expanded events that were created
 	function renderEvent(eventInput, stick) {
 		var abstractEvent = buildEventFromInput(eventInput);
@@ -8238,8 +8238,8 @@ function EventManager(options) { // assumed to be a calendar
 
 		return [];
 	}
-	
-	
+
+
 	function removeEvents(filter) {
 		var eventID;
 		var i;
@@ -8268,8 +8268,8 @@ function EventManager(options) { // assumed to be a calendar
 
 		reportEvents(cache);
 	}
-	
-	
+
+
 	function clientEvents(filter) {
 		if ($.isFunction(filter)) {
 			return $.grep(cache, filter);
@@ -8282,28 +8282,28 @@ function EventManager(options) { // assumed to be a calendar
 		}
 		return cache; // else, return all
 	}
-	
-	
-	
+
+
+
 	/* Loading State
 	-----------------------------------------------------------------------------*/
-	
-	
+
+
 	function pushLoading() {
 		if (!(loadingLevel++)) {
 			trigger('loading', null, true, getView());
 		}
 	}
-	
-	
+
+
 	function popLoading() {
 		if (!(--loadingLevel)) {
 			trigger('loading', null, false, getView());
 		}
 	}
-	
-	
-	
+
+
+
 	/* Event Normalization
 	-----------------------------------------------------------------------------*/
 
@@ -9078,7 +9078,7 @@ var BasicView = fcViews.basic = View.extend({
 
 
 	// Generates the HTML that goes before every other type of row generated by DayGrid. Ordering depends on isRTL.
-	// Affects helper-skeleton and highlight-skeleton rows.
+	// Affects Helper-skeleton and highlight-skeleton rows.
 	introHtml: function() {
 		if (this.weekNumbersVisible) {
 			return '<td class="fc-week-number" ' + this.weekNumberStyleAttr() + '></td>';
@@ -9219,7 +9219,7 @@ var BasicView = fcViews.basic = View.extend({
 	------------------------------------------------------------------------------------------------------------------*/
 
 
-	// A returned value of `true` signals that a mock "helper" event has been rendered.
+	// A returned value of `true` signals that a mock "Helper" event has been rendered.
 	renderDrag: function(dropLocation, seg) {
 		return this.dayGrid.renderDrag(dropLocation, seg);
 	},
@@ -9497,7 +9497,7 @@ fcViews.agenda = View.extend({ // AgendaView
 
 
 	// Generates the HTML that goes before all other types of cells.
-	// Affects content-skeleton, helper-skeleton, highlight-skeleton for both the time-grid and day-grid.
+	// Affects content-skeleton, Helper-skeleton, highlight-skeleton for both the time-grid and day-grid.
 	// Queried by the TimeGrid and DayGrid subcomponents when generating rows. Ordering depends on isRTL.
 	introHtml: function() {
 		return '<td class="fc-axis" ' + this.axisStyleAttr() + '></td>';
@@ -9671,7 +9671,7 @@ fcViews.agenda = View.extend({ // AgendaView
 	------------------------------------------------------------------------------------------------------------------*/
 
 
-	// A returned value of `true` signals that a mock "helper" event has been rendered.
+	// A returned value of `true` signals that a mock "Helper" event has been rendered.
 	renderDrag: function(dropLocation, seg) {
 		if (dropLocation.start.hasTime()) {
 			return this.timeGrid.renderDrag(dropLocation, seg);

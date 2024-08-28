@@ -1599,7 +1599,7 @@ var accordion = $.widget( "ui.accordion", {
 	_create: function() {
 		var options = this.options;
 		this.prevShow = this.prevHide = $();
-		this.element.addClass( "ui-accordion ui-widget ui-helper-reset" )
+		this.element.addClass( "ui-accordion ui-widget ui-Helper-reset" )
 			// ARIA
 			.attr( "role", "tablist" );
 
@@ -1648,7 +1648,7 @@ var accordion = $.widget( "ui.accordion", {
 
 		// clean up main element
 		this.element
-			.removeClass( "ui-accordion ui-widget ui-helper-reset" )
+			.removeClass( "ui-accordion ui-widget ui-Helper-reset" )
 			.removeAttr( "role" );
 
 		// clean up headers
@@ -1666,7 +1666,7 @@ var accordion = $.widget( "ui.accordion", {
 
 		// clean up content panels
 		contents = this.headers.next()
-			.removeClass( "ui-helper-reset ui-widget-content ui-corner-bottom " +
+			.removeClass( "ui-Helper-reset ui-widget-content ui-corner-bottom " +
 				"ui-accordion-content ui-accordion-content-active ui-state-disabled" )
 			.css( "display", "" )
 			.removeAttr( "role" )
@@ -1803,7 +1803,7 @@ var accordion = $.widget( "ui.accordion", {
 			.addClass( "ui-accordion-header ui-state-default ui-corner-all" );
 
 		this.panels = this.headers.next()
-			.addClass( "ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" )
+			.addClass( "ui-accordion-content ui-Helper-reset ui-widget-content ui-corner-bottom" )
 			.filter( ":not(.ui-accordion-content-active)" )
 			.hide();
 
@@ -3580,7 +3580,7 @@ $.widget( "ui.button", {
 					this.buttonElement = ancestor.find( labelSelector );
 				}
 			}
-			this.element.addClass( "ui-helper-hidden-accessible" );
+			this.element.addClass( "ui-Helper-hidden-accessible" );
 
 			checked = this.element.is( ":checked" );
 			if ( checked ) {
@@ -3598,7 +3598,7 @@ $.widget( "ui.button", {
 
 	_destroy: function() {
 		this.element
-			.removeClass( "ui-helper-hidden-accessible" );
+			.removeClass( "ui-Helper-hidden-accessible" );
 		this.buttonElement
 			.removeClass( baseClasses + " ui-state-active " + typeClasses )
 			.removeAttr( "role" )
@@ -3895,7 +3895,7 @@ function Datepicker() {
 	$.extend(this._defaults, this.regional[""]);
 	this.regional.en = $.extend( true, {}, this.regional[ "" ]);
 	this.regional[ "en-US" ] = $.extend( true, {}, this.regional.en );
-	this.dpDiv = datepicker_bindHover($("<div id='" + this._mainDivId + "' class='ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all'></div>"));
+	this.dpDiv = datepicker_bindHover($("<div id='" + this._mainDivId + "' class='ui-datepicker ui-widget ui-widget-content ui-Helper-clearfix ui-corner-all'></div>"));
 }
 
 $.extend(Datepicker.prototype, {
@@ -3948,7 +3948,7 @@ $.extend(Datepicker.prototype, {
 			drawMonth: 0, drawYear: 0, // month being drawn
 			inline: inline, // is datepicker inline or not
 			dpDiv: (!inline ? this.dpDiv : // presentation div
-			datepicker_bindHover($("<div class='" + this._inlineClass + " ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all'></div>")))};
+			datepicker_bindHover($("<div class='" + this._inlineClass + " ui-datepicker ui-widget ui-widget-content ui-Helper-clearfix ui-corner-all'></div>")))};
 	},
 
 	/* Attach the date picker to an input field. */
@@ -5485,7 +5485,7 @@ $.extend(Datepicker.prototype, {
 					}
 					calender += "'>";
 				}
-				calender += "<div class='ui-datepicker-header ui-widget-header ui-helper-clearfix" + cornerClass + "'>" +
+				calender += "<div class='ui-datepicker-header ui-widget-header ui-Helper-clearfix" + cornerClass + "'>" +
 					(/all|left/.test(cornerClass) && row === 0 ? (isRTL ? next : prev) : "") +
 					(/all|right/.test(cornerClass) && row === 0 ? (isRTL ? prev : next) : "") +
 					this._generateMonthYearHeader(inst, drawMonth, drawYear, minDate, maxDate,
@@ -5984,12 +5984,12 @@ $.widget("ui.draggable", $.ui.mouse, {
 
 		var o = this.options;
 
-		//Create and append the visible helper
+		//Create and append the visible Helper
 		this.helper = this._createHelper(event);
 
 		this.helper.addClass("ui-draggable-dragging");
 
-		//Cache the helper size
+		//Cache the Helper size
 		this._cacheHelperProportions();
 
 		//If ddmanager is used for droppables, set the global draggable
@@ -6005,7 +6005,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 		//Cache the margins of the original element
 		this._cacheMargins();
 
-		//Store the helper's css position
+		//Store the Helper's css position
 		this.cssPosition = this.helper.css( "position" );
 		this.scrollParent = this.helper.scrollParent( true );
 		this.offsetParent = this.helper.offsetParent();
@@ -6022,7 +6022,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 		this.originalPageX = event.pageX;
 		this.originalPageY = event.pageY;
 
-		//Adjust the mouse offset relative to the helper if "cursorAt" is supplied
+		//Adjust the mouse offset relative to the Helper if "cursorAt" is supplied
 		(o.cursorAt && this._adjustOffsetFromHelper(o.cursorAt));
 
 		//Set a containment if given in the options
@@ -6034,7 +6034,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 			return false;
 		}
 
-		//Recache the helper size
+		//Recache the Helper size
 		this._cacheHelperProportions();
 
 		//Prepare the droppable offsets
@@ -6042,11 +6042,11 @@ $.widget("ui.draggable", $.ui.mouse, {
 			$.ui.ddmanager.prepareOffsets(this, event);
 		}
 
-		// Reset helper's right/bottom css if they're set and set explicit width/height instead
+		// Reset Helper's right/bottom css if they're set and set explicit width/height instead
 		// as this prevents resizing of elements with right/bottom set (see #7772)
 		this._normalizeRightBottom();
 
-		this._mouseDrag(event, true); //Execute the drag once - this causes the helper not to be visible before getting its correct position
+		this._mouseDrag(event, true); //Execute the drag once - this causes the Helper not to be visible before getting its correct position
 
 		//If the ddmanager is used for droppables, inform the manager that dragging has started (see #5003)
 		if ( $.ui.ddmanager ) {
@@ -6191,7 +6191,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 		}
 
 		// http://bugs.jqueryui.com/ticket/9446
-		// a helper function can return the original element
+		// a Helper function can return the original element
 		// which wouldn't have been set to relative in _create
 		if ( helperIsFunction && helper[ 0 ] === this.element[ 0 ] ) {
 			this._setPositionRelative();
@@ -6243,7 +6243,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 			document = this.document[ 0 ];
 
 		// This is a special case where we need to modify a offset calculated on start, since the following happened:
-		// 1. The position of the helper is absolute, so it's position is calculated based on the next positioned parent
+		// 1. The position of the Helper is absolute, so it's position is calculated based on the next positioned parent
 		// 2. The actual offset parent is a child of the scroll parent, and the scroll parent isn't the document, which means that
 		//    the scroll is included in the initial calculation of the offset of the parent, and never recalculated upon drag
 		if (this.cssPosition === "absolute" && this.scrollParent[0] !== document && $.contains(this.scrollParent[0], this.offsetParent[0])) {
@@ -6560,7 +6560,7 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 			if ( sortable.isOver ) {
 				sortable.isOver = 0;
 
-				// Allow this sortable to handle removing the helper
+				// Allow this sortable to handle removing the Helper
 				draggable.cancelHelperRemoval = true;
 				sortable.cancelHelperRemoval = false;
 
@@ -6576,11 +6576,11 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 				sortable._mouseStop(event);
 
 				// Once drag has ended, the sortable should return to using
-				// its original helper, not the shared helper from draggable
+				// its original Helper, not the shared Helper from draggable
 				sortable.options.helper = sortable.options._helper;
 			} else {
-				// Prevent this Sortable from removing the helper.
-				// However, don't set the draggable to remove the helper
+				// Prevent this Sortable from removing the Helper.
+				// However, don't set the draggable to remove the Helper
 				// either as another connected Sortable may yet handle the removal.
 				sortable.cancelHelperRemoval = true;
 
@@ -6630,7 +6630,7 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 						.appendTo( sortable.element )
 						.data( "ui-sortable-item", true );
 
-					// Store helper option to later restore it
+					// Store Helper option to later restore it
 					sortable.options._helper = sortable.options.helper;
 
 					sortable.options.helper = function() {
@@ -6638,7 +6638,7 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 					};
 
 					// Fire the start events of the sortable with our passed browser event,
-					// and our own helper (so it doesn't create a new one)
+					// and our own Helper (so it doesn't create a new one)
 					event.target = sortable.currentItem[ 0 ];
 					sortable._mouseCapture( event, true );
 					sortable._mouseStart( event, true, true );
@@ -6654,7 +6654,7 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 
 					draggable._trigger( "toSortable", event );
 
-					// Inform draggable that the helper is in a valid drop zone,
+					// Inform draggable that the Helper is in a valid drop zone,
 					// used solely in the revert option to handle "valid/invalid".
 					draggable.dropped = sortable.element;
 
@@ -6679,7 +6679,7 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 			} else {
 				// If it doesn't intersect with the sortable, and it intersected before,
 				// we fake the drag stop of the sortable, but make sure it doesn't remove
-				// the helper by using cancelHelperRemoval.
+				// the Helper by using cancelHelperRemoval.
 				if ( sortable.isOver ) {
 
 					sortable.isOver = 0;
@@ -6710,7 +6710,7 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 
 					draggable._trigger( "fromSortable", event );
 
-					// Inform draggable that the helper is no longer in a valid drop zone
+					// Inform draggable that the Helper is no longer in a valid drop zone
 					draggable.dropped = false;
 
 					// Need to refreshPositions of all sortables just in case removing
@@ -7035,7 +7035,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 			aspectRatio: o.aspectRatio,
 			originalElement: this.element,
 			_proportionallyResizeElements: [],
-			_helper: o.helper || o.ghost || o.animate ? o.helper || "ui-resizable-helper" : null
+			_helper: o.helper || o.ghost || o.animate ? o.helper || "ui-resizable-Helper" : null
 		});
 
 		// Wrap the element if it cannot hold child nodes
@@ -8461,7 +8461,7 @@ var dialog = $.widget( "ui.dialog", {
 		var uiDialogTitle;
 
 		this.uiDialogTitlebar = $( "<div>" )
-			.addClass( "ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix" )
+			.addClass( "ui-dialog-titlebar ui-widget-header ui-corner-all ui-Helper-clearfix" )
 			.prependTo( this.uiDialog );
 		this._on( this.uiDialogTitlebar, {
 			mousedown: function( event ) {
@@ -8515,7 +8515,7 @@ var dialog = $.widget( "ui.dialog", {
 
 	_createButtonPane: function() {
 		this.uiDialogButtonPane = $( "<div>" )
-			.addClass( "ui-dialog-buttonpane ui-widget-content ui-helper-clearfix" );
+			.addClass( "ui-dialog-buttonpane ui-widget-content ui-Helper-clearfix" );
 
 		this.uiButtonSet = $( "<div>" )
 			.addClass( "ui-dialog-buttonset" )
@@ -10563,7 +10563,7 @@ $.fn.extend({
 		};
 	})( $.fn.toggle ),
 
-	// helper functions
+	// Helper functions
 	cssUnit: function(key) {
 		var style = this.css( key ),
 			val = [];
@@ -11975,7 +11975,7 @@ var selectable = $.widget("ui.selectable", $.ui.mouse, {
 
 		this._mouseInit();
 
-		this.helper = $("<div class='ui-selectable-helper'></div>");
+		this.helper = $("<div class='ui-selectable-Helper'></div>");
 	},
 
 	_destroy: function() {
@@ -12002,7 +12002,7 @@ var selectable = $.widget("ui.selectable", $.ui.mouse, {
 		this._trigger("start", event);
 
 		$(options.appendTo).append(this.helper);
-		// position helper (lasso)
+		// position Helper (lasso)
 		this.helper.css({
 			"left": event.pageX,
 			"top": event.pageY,
@@ -12080,7 +12080,7 @@ var selectable = $.widget("ui.selectable", $.ui.mouse, {
 			var selectee = $.data(this, "selectable-item"),
 				hit = false;
 
-			//prevent helper from being selected if appendTo: selectable
+			//prevent Helper from being selected if appendTo: selectable
 			if (!selectee || selectee.element === that.element[0]) {
 				return;
 			}
@@ -13655,10 +13655,10 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 		//We only need to call refreshPositions, because the refreshItems call has been moved to mouseCapture
 		this.refreshPositions();
 
-		//Create and append the visible helper
+		//Create and append the visible Helper
 		this.helper = this._createHelper(event);
 
-		//Cache the helper size
+		//Cache the Helper size
 		this._cacheHelperProportions();
 
 		/*
@@ -13685,10 +13685,10 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 				top: event.pageY - this.offset.top
 			},
 			parent: this._getParentOffset(),
-			relative: this._getRelativeOffset() //This is a relative to absolute position minus the actual position calculation - only used for relative positioned helper
+			relative: this._getRelativeOffset() //This is a relative to absolute position minus the actual position calculation - only used for relative positioned Helper
 		});
 
-		// Only after we got the offset, we can change the helper's position to absolute
+		// Only after we got the offset, we can change the Helper's position to absolute
 		// TODO: Still need to figure out a way to make relative sorting possible
 		this.helper.css("position", "absolute");
 		this.cssPosition = this.helper.css("position");
@@ -13698,13 +13698,13 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 		this.originalPageX = event.pageX;
 		this.originalPageY = event.pageY;
 
-		//Adjust the mouse offset relative to the helper if "cursorAt" is supplied
+		//Adjust the mouse offset relative to the Helper if "cursorAt" is supplied
 		(o.cursorAt && this._adjustOffsetFromHelper(o.cursorAt));
 
 		//Cache the former DOM position
 		this.domPosition = { prev: this.currentItem.prev()[0], parent: this.currentItem.parent()[0] };
 
-		//If the helper is not the original, hide the original so it's not playing any role during the drag, won't cause anything bad this way
+		//If the Helper is not the original, hide the original so it's not playing any role during the drag, won't cause anything bad this way
 		if(this.helper[0] !== this.currentItem[0]) {
 			this.currentItem.hide();
 		}
@@ -13749,7 +13749,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 		//Call callbacks
 		this._trigger("start", event, this._uiHash());
 
-		//Recache the helper size
+		//Recache the Helper size
 		if(!this._preserveHelperProportions) {
 			this._cacheHelperProportions();
 		}
@@ -13773,8 +13773,8 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 
 		this.dragging = true;
 
-		this.helper.addClass("ui-sortable-helper");
-		this._mouseDrag(event); //Execute the drag once - this causes the helper not to be visible before getting its correct position
+		this.helper.addClass("ui-sortable-Helper");
+		this._mouseDrag(event); //Execute the drag once - this causes the Helper not to be visible before getting its correct position
 		return true;
 
 	},
@@ -13832,7 +13832,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 		//Regenerate the absolute position used for position checks
 		this.positionAbs = this._convertPositionTo("absolute");
 
-		//Set the helper position
+		//Set the Helper position
 		if(!this.options.axis || this.options.axis !== "y") {
 			this.helper[0].style.left = this.position.left+"px";
 		}
@@ -13942,7 +13942,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 			this._mouseUp({ target: null });
 
 			if(this.options.helper === "original") {
-				this.currentItem.css(this._storedCSS).removeClass("ui-sortable-helper");
+				this.currentItem.css(this._storedCSS).removeClass("ui-sortable-Helper");
 			} else {
 				this.currentItem.show();
 			}
@@ -14118,13 +14118,13 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 				for ( j = cur.length - 1; j >= 0; j--){
 					inst = $.data(cur[j], this.widgetFullName);
 					if(inst && inst !== this && !inst.options.disabled) {
-						queries.push([$.isFunction(inst.options.items) ? inst.options.items.call(inst.element) : $(inst.options.items, inst.element).not(".ui-sortable-helper").not(".ui-sortable-placeholder"), inst]);
+						queries.push([$.isFunction(inst.options.items) ? inst.options.items.call(inst.element) : $(inst.options.items, inst.element).not(".ui-sortable-Helper").not(".ui-sortable-placeholder"), inst]);
 					}
 				}
 			}
 		}
 
-		queries.push([$.isFunction(this.options.items) ? this.options.items.call(this.element, null, { options: this.options, item: this.currentItem }) : $(this.options.items, this.element).not(".ui-sortable-helper").not(".ui-sortable-placeholder"), this]);
+		queries.push([$.isFunction(this.options.items) ? this.options.items.call(this.element, null, { options: this.options, item: this.currentItem }) : $(this.options.items, this.element).not(".ui-sortable-Helper").not(".ui-sortable-placeholder"), this]);
 
 		function addItems() {
 			items.push( this );
@@ -14257,7 +14257,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 					var nodeName = that.currentItem[0].nodeName.toLowerCase(),
 						element = $( "<" + nodeName + ">", that.document[0] )
 							.addClass(className || that.currentItem[0].className+" ui-sortable-placeholder")
-							.removeClass("ui-sortable-helper");
+							.removeClass("ui-sortable-Helper");
 
 					if ( nodeName === "tbody" ) {
 						that._createTrPlaceholder(
@@ -14420,7 +14420,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 		var o = this.options,
 			helper = $.isFunction(o.helper) ? $(o.helper.apply(this.element[0], [event, this.currentItem])) : (o.helper === "clone" ? this.currentItem.clone() : this.currentItem);
 
-		//Add the helper to the DOM if that didn't happen already
+		//Add the Helper to the DOM if that didn't happen already
 		if(!helper.parents("body").length) {
 			$(o.appendTo !== "parent" ? o.appendTo : this.currentItem[0].parentNode)[0].appendChild(helper[0]);
 		}
@@ -14469,7 +14469,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 		var po = this.offsetParent.offset();
 
 		// This is a special case where we need to modify a offset calculated on start, since the following happened:
-		// 1. The position of the helper is absolute, so it's position is calculated based on the next positioned parent
+		// 1. The position of the Helper is absolute, so it's position is calculated based on the next positioned parent
 		// 2. The actual offset parent is a child of the scroll parent, and the scroll parent isn't the document, which means that
 		//    the scroll is included in the initial calculation of the offset of the parent, and never recalculated upon drag
 		if(this.cssPosition === "absolute" && this.scrollParent[0] !== this.document[0] && $.contains(this.scrollParent[0], this.offsetParent[0])) {
@@ -14683,7 +14683,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 					this._storedCSS[i] = "";
 				}
 			}
-			this.currentItem.css(this._storedCSS).removeClass("ui-sortable-helper");
+			this.currentItem.css(this._storedCSS).removeClass("ui-sortable-Helper");
 		} else {
 			this.currentItem.show();
 		}
@@ -14691,7 +14691,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 		if(this.fromOutside && !noPropagation) {
 			delayedTriggers.push(function(event) { this._trigger("receive", event, this._uiHash(this.fromOutside)); });
 		}
-		if((this.fromOutside || this.domPosition.prev !== this.currentItem.prev().not(".ui-sortable-helper")[0] || this.domPosition.parent !== this.currentItem.parent()[0]) && !noPropagation) {
+		if((this.fromOutside || this.domPosition.prev !== this.currentItem.prev().not(".ui-sortable-Helper")[0] || this.domPosition.parent !== this.currentItem.parent()[0]) && !noPropagation) {
 			delayedTriggers.push(function(event) { this._trigger("update", event, this._uiHash()); }); //Trigger update callback if the DOM position has changed
 		}
 
@@ -15650,7 +15650,7 @@ var tabs = $.widget( "ui.tabs", {
 			prevPanels = this.panels;
 
 		this.tablist = this._getList()
-			.addClass( "ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" )
+			.addClass( "ui-tabs-nav ui-Helper-reset ui-Helper-clearfix ui-widget-header ui-corner-all" )
 			.attr( "role", "tablist" )
 
 			// Prevent users from focusing disabled tabs via click
@@ -15986,7 +15986,7 @@ var tabs = $.widget( "ui.tabs", {
 		this.element.removeClass( "ui-tabs ui-widget ui-widget-content ui-corner-all ui-tabs-collapsible" );
 
 		this.tablist
-			.removeClass( "ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" )
+			.removeClass( "ui-tabs-nav ui-Helper-reset ui-Helper-clearfix ui-widget-header ui-corner-all" )
 			.removeAttr( "role" );
 
 		this.anchors
