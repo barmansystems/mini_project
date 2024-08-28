@@ -37,22 +37,22 @@
     <!-- /.content-wrapper -->
 
     <!-- Control Sidebar -->
-{{--    <aside class="control-sidebar control-sidebar-dark">--}}
-{{--        <!-- Control sidebar content goes here -->--}}
-{{--        <div class="p-3">--}}
-{{--            <h5>Title</h5>--}}
-{{--            <p>Sidebar content</p>--}}
-{{--        </div>--}}
-{{--    </aside>--}}
+    {{--    <aside class="control-sidebar control-sidebar-dark">--}}
+    {{--        <!-- Control sidebar content goes here -->--}}
+    {{--        <div class="p-3">--}}
+    {{--            <h5>Title</h5>--}}
+    {{--            <p>Sidebar content</p>--}}
+    {{--        </div>--}}
+    {{--    </aside>--}}
     <!-- /.control-sidebar -->
 
     <!-- Main Footer -->
     @include("partials.footer")
 </div>
-
-<script src="plugins/jquery/jquery.min.js"></script>
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="dist/js/adminlte.min.js"></script>
+<script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('dist/js/adminlte.min.js')}}"></script>
+@include('sweetalert::alert')
 @yield('js-script')
 </body>
 </html>

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Str;
 
 use Illuminate\Support\Facades\Route;
 
@@ -8,12 +9,8 @@ if (!function_exists('active_sidebar')) {
     {
         $route = Route::current()->uri();
 
-        $route = ltrim($route, '/');
-
         foreach ($items as $value) {
-
-            $value = ltrim($value, '/');
-            if ($route === $value) {
+            if (Str::is($value, $route)) {
                 return true;
             }
         }
