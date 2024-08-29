@@ -76,9 +76,12 @@ class TaskController extends Controller
     }
 
 
-    public function destroy(string $id)
+    public function destroy(Task $task)
     {
-        //
+        $task->delete();
+        alert()->success('با موفقیت حذف شد.', 'موفقیت آمیز');
+        return back();
+
     }
 
     private function assignTask(Task $task, $users)

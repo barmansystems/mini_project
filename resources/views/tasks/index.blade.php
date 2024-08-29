@@ -9,8 +9,12 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-left">
-                            <li class="breadcrumb-item"><a href="/">خانه</a></li>
-                            <li class="breadcrumb-item"><a href="/tasks">وظایف</a></li>
+                            <li class="breadcrumb-item">
+                                <a href="/">خانه</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/tasks">وظایف</a>
+                            </li>
                         </ol>
                     </div>
                 </div>
@@ -26,9 +30,7 @@
                                 ایجاد وظیفه
                             </a>
                         </div>
-
                         <div class="card">
-
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-hover">
                                     <tr>
@@ -75,10 +77,8 @@
                             </div>
                             <div class="m-2">{{ $tasks->appends(request()->all())->links() }}</div>
                         </div>
-
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -92,15 +92,16 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="" method="post">
+                <form action="" method="post" id="myForm">
                     @csrf
                     @method('DELETE')
-                    <div class="modal-body" id="descriptionModal">
+                    <div class="modal-body text-center" id="descriptionModal">
+                        <i class="fa fa-trash text-danger mb-2" style="font-size: 3rem"></i>
                         <h5 class="text-center">آیا این وظیفه حذف شود؟</h5>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
-                        <button type="submit" class="btn btn-danger" data-dismiss="modal">حذف</button>
+                        <button type="button" class="btn btn-secondary m-1" data-dismiss="modal">بستن</button>
+                        <button type="submit" class="btn btn-danger">حذف</button>
                     </div>
                 </form>
             </div>
@@ -110,8 +111,8 @@
 @section('js-script')
     <script>
         $(document).on('click', '.trashRow', function () {
-            console.log($(this).data('id'));
+            var id = $(this).data('id');
+            $('#myForm').attr('action', '/tasks/' + id);
         });
     </script>
 @endsection
-

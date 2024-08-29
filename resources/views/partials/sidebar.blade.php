@@ -40,7 +40,7 @@
                     {{--                        </ul>--}}
                     {{--                    </li>--}}
                     <li class="nav-item">
-                        <a href="/" class="nav-link {{active_sidebar([''])? 'active' : ''}}">
+                        <a href="/" class="nav-link {{active_sidebar(['/'])? 'active' : ''}}">
                             <i class="nav-icon fa fa-th"></i>
                             <p>
                                 داشبورد
@@ -60,6 +60,12 @@
                         <a href="/tasks" class="nav-link {{active_sidebar(['tasks','tasks/*'])? 'active' :''}}">
                             <i class="nav-icon fa fa-tasks"></i>
                             <p>وظایف</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/reports" class="nav-link {{active_sidebar(['reports','reports/*'])? 'active' :''}}">
+                            <i class="nav-icon fa fa-file-text"></i>
+                            <p>گزارشات</p>
                         </a>
                     </li>
                 </ul>
