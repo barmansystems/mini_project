@@ -85,7 +85,7 @@
 
                 </div>
                 @if(session('error'))
-                    <div style="text-align: center">
+                    <div style="text-align: center ;margin-top: .8rem">
                         <span class="text-white" style="font-size: .8rem">{{ session('error') }}</span>
                     </div>
                 @endif

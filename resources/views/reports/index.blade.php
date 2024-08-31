@@ -85,14 +85,39 @@
         </div>
     </div>
 
+
+    <div class="modal fade" id="reportDescModal" tabindex="-1" role="dialog"
+         aria-labelledby="reportDescModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title mb-2 text-center">توضیحات</h4>
+                </div>
+                <div class="modal-body text-right" id="descriptionModal">
+                    <ol id="reportDesc">
+
+                    </ol>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary m-1" data-dismiss="modal">بستن</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 @section('js-script')
     <script src="{{asset('plugins/jdate/jdate.js')}}"></script>
     <script>
+
+
         $(document).ready(function () {
+
             var currentPage = 1;
             var apiUrl = 'http://127.0.0.1:7000/api/get-reports';
+            var apiUrlDesc = 'http://127.0.0.1:7000/api/get-report-desc/';
             var tbody = $('#reports');
+
 
             function fetchReports(page) {
                 $.ajax({
@@ -106,12 +131,12 @@
                         $.each(reports, function (index, report) {
                             tbody.append(`
                     <tr>
-                        <td>${(index + 1) + (page - 1) * 10}</td>
+                        <td>${convertToPersianNumbers((index + 1) + (page - 1) * 10)}</td>
                         <td>${report.user.name} ${report.user.family}</td>
                         <td>${report.user.role.label}</td>
-                        <td>${moment(report.date , 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</td>
-                        <td>${moment(report.created_at, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</td>
-                        <td><a class="btn btn-info" href="/reports/${report.id}">مشاهده</a></td>
+                        <td>${convertToPersianNumbers(moment(report.date, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD'))}</td>
+                        <td>${convertToPersianNumbers(moment(report.created_at, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD'))}</td>
+                        <td><button class="btn btn-info report-info" data-toggle="modal" data-target="#reportDescModal" data-id="${report.id}">مشاهده</button></td>
                     </tr>
                 `);
                         });
@@ -151,6 +176,7 @@
             $('#perso-tejarat').click(function () {
                 tbody.empty();
                 apiUrl = 'http://127.0.0.1:7000/api/get-reports';
+                apiUrlDesc = 'http://127.0.0.1:7000/api/get-report-desc/';
                 $('.btn').removeClass('btn-primary').addClass('btn-light');
                 $(this).removeClass('btn-light').addClass('btn-primary');
                 fetchReports(1);
@@ -158,12 +184,49 @@
 
             $('#adak-tejarat').click(function () {
                 tbody.empty();
-                apiUrl = 'http://127.0.0.1:7000/api/get-reports';
+                apiUrl = 'http://127.0.0.1:10000/api/get-reports';
+                apiUrlDesc = 'http://127.0.0.1:10000/api/get-report-desc/';
+                console.log(apiUrlDesc)
                 $('.btn').removeClass('btn-primary').addClass('btn-light');
                 $(this).removeClass('btn-light').addClass('btn-primary');
                 fetchReports(1);
             });
+
+            $(document).on('click', '.report-info', function () {
+                var reportDesc = $('#reportDesc');
+                var reportId = $(this).data('id');
+                reportDesc.empty();
+                $.ajax({
+                    url: apiUrlDesc + reportId,
+                    type: 'POST',
+                    data: {id: reportId},
+                    success: function (response) {
+                        $.each(response.data, function (i, item) {
+                            $('#reportDesc').append(`<li>${item}</li>`);
+                        });
+                    }
+                });
+            });
+            function convertToPersianNumbers(text) {
+                text = String(text);
+                const englishToPersianMap = {
+                    '0': '۰',
+                    '1': '۱',
+                    '2': '۲',
+                    '3': '۳',
+                    '4': '۴',
+                    '5': '۵',
+                    '6': '۶',
+                    '7': '۷',
+                    '8': '۸',
+                    '9': '۹'
+                };
+
+                return text.replace(/[0-9]/g, (match) => englishToPersianMap[match]);
+            }
         });
+
+
 
 
     </script>

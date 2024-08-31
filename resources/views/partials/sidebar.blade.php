@@ -52,7 +52,7 @@
                         <a href="/users" class="nav-link {{active_sidebar(['users'])? 'active' :''}}">
                             <i class="nav-icon fa fa-users"></i>
                             <p>کارمندان
-                                <span class="right badge badge-light">{{\App\Models\User::count()}}</span>
+                                <span class="right badge badge-light">{{convert_number_to_persian(\App\Models\User::count())}}</span>
                             </p>
                         </a>
                     </li>
@@ -66,6 +66,12 @@
                         <a href="/reports" class="nav-link {{active_sidebar(['reports','reports/*'])? 'active' :''}}">
                             <i class="nav-icon fa fa-file-text"></i>
                             <p>گزارشات</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/notes" class="nav-link {{active_sidebar(['notes','notes/*'])? 'active' :''}}">
+                            <i class="nav-icon fa fa-file-text"></i>
+                            <p>یادداشت ها</p>
                         </a>
                     </li>
                 </ul>
