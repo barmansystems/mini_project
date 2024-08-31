@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="https://moshrefiholding.com/wp-content/uploads/2023/08/logo-small-150x150.png" sizes="32x32">
+    <link rel="icon" href="https://moshrefiholding.com/wp-content/uploads/2023/08/logo-small-300x300.png" sizes="192x192">
     <meta name="robots" content="noindex, nofollow, noarchive">
     <title>پنل مدیریت | هلدینگ برادران مشرفی</title>
 

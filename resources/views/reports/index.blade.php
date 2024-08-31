@@ -1,5 +1,75 @@
 @extends('layouts.master')
+@section('css-styles')
+    <style>
+        .allLoading{
+            background-color: rgba(208, 208, 208, 0.53);
+            display: grid;
+            grid-template-columns: 1fr;
+            height: 100%;
+            justify-content: center;
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 100%;
+            z-index: 40000;
+
+        }
+        .allLoading .allLoadings {
+            align-items: center;
+            background: rgb(255, 255, 255);
+            border-radius: .4rem;
+            display: grid;
+            height: 7rem;
+            margin: auto;
+            overflow: hidden;
+            padding: 2rem;
+            width: 7rem;
+        }
+
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 3px solid #605f5f;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+
+        }
+
+        .loader::after {
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 3px solid;
+            border-color: #175ddc transparent;
+
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+@endsection
 @section('content')
+    <div class="allLoading" style="display: none">
+        <div class="allLoadings">
+            <span class="loader text-center"></span>
+        </div>
+    </div>
+
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
@@ -34,7 +104,9 @@
                                         آداک تجارت
                                     </button>
                                 </div>
+
                                 <table class="table table-hover">
+
                                     <tr>
                                         <th>ردیف</th>
                                         <th>همکار</th>
@@ -44,14 +116,15 @@
                                         <th>مشاهده</th>
                                     </tr>
 
+
                                     <tbody id="reports">
 
                                     </tbody>
                                 </table>
                             </div>
                             <div class="pagination m-2">
-                                <button id="prev-page" style="display: none;">قبلی</button>
-                                <button id="next-page" style="display: none;">بعدی</button>
+                                <button id="prev-page" class="btn btn-info" style="display: none;">قبلی</button>
+                                <button id="next-page" class="btn btn-info" style="display: none;">بعدی</button>
                             </div>
                         </div>
                     </div>
@@ -118,7 +191,7 @@
             var apiUrlDesc = 'https://parso.moshrefiholding.com/api/get-report-desc/';
             var tbody = $('#reports');
 
-
+            $('.allLoading').show();
             function fetchReports(page) {
                 $.ajax({
                     url: apiUrl,
@@ -128,36 +201,34 @@
                         var reports = response.data;
                         tbody.empty();
                         console.log(response);
+
                         $.each(reports, function (index, report) {
+
+
+                            const createdAt = convertToPersianNumbers(moment(report.created_at).locale('fa').format('HH:mm YYYY/MM/DD'));
+
                             tbody.append(`
                     <tr>
                         <td>${convertToPersianNumbers((index + 1) + (page - 1) * 10)}</td>
                         <td>${report.user.name} ${report.user.family}</td>
                         <td>${report.user.role.label}</td>
-                        <td>${convertToPersianNumbers(moment(report.date, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD'))}</td>
-                        <td>${convertToPersianNumbers(moment(report.created_at, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD'))}</td>
+                        <td>${convertToPersianNumbers(moment(report.date).locale('fa').format('YYYY/MM/DD'))}</td>
+                        <td>${createdAt}</td>
                         <td><button class="btn btn-info report-info" data-toggle="modal" data-target="#reportDescModal" data-id="${report.id}">مشاهده</button></td>
                     </tr>
                 `);
                         });
 
                         // مدیریت دکمه‌های صفحه‌بندی
-                        if (response.prev_page_url) {
-                            $('#prev-page').show();
-                        } else {
-                            $('#prev-page').hide();
-                        }
-
-                        if (response.next_page_url) {
-                            $('#next-page').show();
-                        } else {
-                            $('#next-page').hide();
-                        }
+                        $('#prev-page').toggle(!!response.prev_page_url);
+                        $('#next-page').toggle(!!response.next_page_url);
 
                         currentPage = page;
+                        $('.allLoading').hide();
                     }
                 });
             }
+
 
             // بارگذاری اولیه
             fetchReports(1);
@@ -174,6 +245,7 @@
 
             // تغییر آدرس API و به‌روزرسانی دکمه‌ها
             $('#perso-tejarat').click(function () {
+                $('.allLoading').show();
                 tbody.empty();
                 apiUrl = 'https://parso.moshrefiholding.com/api/get-reports';
                 apiUrlDesc = 'https://parso.moshrefiholding.com/api/get-report-desc/';
@@ -183,6 +255,7 @@
             });
 
             $('#adak-tejarat').click(function () {
+                $('.allLoading').show();
                 tbody.empty();
                 apiUrl = 'https://adaktejarat.moshrefiholding.com/api/get-reports';
                 apiUrlDesc = 'https://adaktejarat.moshrefiholding.com/api/get-report-desc/';
@@ -207,6 +280,7 @@
                     }
                 });
             });
+
             function convertToPersianNumbers(text) {
                 text = String(text);
                 const englishToPersianMap = {
@@ -225,8 +299,6 @@
                 return text.replace(/[0-9]/g, (match) => englishToPersianMap[match]);
             }
         });
-
-
 
 
     </script>

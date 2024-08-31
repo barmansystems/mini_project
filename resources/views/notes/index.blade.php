@@ -2,17 +2,18 @@
 
 @section('css-styles')
     <style>
-        .card .title{
+        .card .title {
             background: transparent;
             border: none;
             width: 100%;
             color: #fff;
         }
-        .card .title:focus-visible{
+
+        .card .title:focus-visible {
             outline: none !important;
         }
 
-        .card .text{
+        .card .text {
             background: transparent;
             border: none;
             resize: none;
@@ -21,16 +22,16 @@
             text-align: justify;
         }
 
-        .card .text:focus-visible{
+        .card .text:focus-visible {
             outline: none;
         }
 
-        .loading{
+        .loading {
             margin-right: 10px;
             margin-bottom: 8px;
         }
 
-        .btn-remove{
+        .btn-remove {
             font-size: 1.5rem !important;
         }
     </style>
@@ -47,6 +48,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-left">
                             <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                            <li class="breadcrumb-item"><a href="/notes">یادداشت ها</a></li>
                         </ol>
                     </div>
                 </div>
@@ -55,46 +57,48 @@
         <div class="row">
             <div class="col">
 
-                    <div class="card-body">
-                        <div class="card-title d-flex justify-content-end">
+                <div class="card-body">
+                    <div class="card-title d-flex justify-content-end">
 
-                                <button class="btn btn-primary mb-2" id="btn_add">
-                                    <i class="fa fa-plus mr-2"></i>
-                                    ایجاد یادداشت
-                                </button>
-                        </div>
-                        <div class="row" id="list">
-                            @foreach($notes as $note)
-                                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                                    <div class="card">
-                                        <div class="card-header bg-primary py-3 text-white">
-                                            <div class="card-widgets text-left">
-                                                <a href="javascript:void(0)" class="btn-remove">&times;</a>
-                                            </div>
-                                            <h5 class="card-title mb-0 text-white d-flex">
-                                                <input type="text" name="note-title" class="title" value="{{ $note->title }}" data-id="{{ $note->id }}" maxlength="30" placeholder="عنوان یادداشت">
-                                            </h5>
+                        <button class="btn btn-primary mb-2" id="btn_add">
+                            <i class="fa fa-plus mr-2"></i>
+                            ایجاد یادداشت
+                        </button>
+                    </div>
+                    <div class="row" id="list">
+                        @foreach($notes as $note)
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                                <div class="card">
+                                    <div class="card-header bg-primary py-3 text-white">
+                                        <div class="card-widgets text-left">
+                                            <a href="javascript:void(0)" class="btn-remove">&times;</a>
                                         </div>
-                                        <div id="cardCollpase4" class="collapse show">
-                                            <div class="card-body">
-                                                <textarea class="text" name="note-text" spellcheck="false" placeholder="متن یادداشت...">{{ $note->text }}</textarea>
-                                            </div>
-                                            <div class="loading d-none">
-                                                درحال ذخیره سازی ...
-                                            </div>
+                                        <h5 class="card-title mb-0 text-white d-flex">
+                                            <input type="text" name="note-title" class="title"
+                                                   value="{{ $note->title }}" data-id="{{ $note->id }}" maxlength="30"
+                                                   placeholder="عنوان یادداشت" autocomplete="off">
+                                        </h5>
+                                    </div>
+                                    <div id="cardCollpase4" class="collapse show">
+                                        <div class="card-body">
+                                            <textarea class="text" name="note-text" spellcheck="false"
+                                                      placeholder="متن یادداشت..."
+                                                      autocomplete="off">{{ $note->text }}</textarea>
+                                        </div>
+                                        <div class="loading d-none">
+                                            درحال ذخیره سازی ...
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
-                        </div>
-                        <div class="d-flex justify-content-center">{{ $notes->appends(request()->all())->links() }}</div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="d-flex justify-content-center">{{ $notes->appends(request()->all())->links() }}</div>
 
                 </div>
             </div>
         </div>
     </div>
-
-
 
 @endsection
 @section('js-script')
@@ -115,12 +119,12 @@
                                                     <a href="javascript:void(0)" class="btn-remove">&times;</a>
                                                 </div>
                                                 <h5 class="card-title mb-0 text-white d-flex">
-                                                    <input type="text" name="note-title" class="title" maxlength="30" placeholder="عنوان یادداشت">
+                                                    <input type="text" name="note-title" class="title" maxlength="30" placeholder="عنوان یادداشت" autocomplete="off">
                                                 </h5>
                                             </div>
                                             <div id="cardCollpase4" class="collapse show">
                                                 <div class="card-body">
-                                                    <textarea class="text" name="note-text" spellcheck="false" placeholder="متن یادداشت..."></textarea>
+                                                    <textarea class="text" name="note-text" spellcheck="false" placeholder="متن یادداشت..." autocomplete="off"></textarea>
                                                 </div>
                                                 <div class="loading d-none">
                                                     درحال ذخیره سازی ...
@@ -237,8 +241,6 @@
             })
             // end btn remove
         });
-
-
 
 
     </script>
