@@ -70,7 +70,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="/notes" class="nav-link {{active_sidebar(['notes','notes/*'])? 'active' :''}}">
-                            <i class="nav-icon fa fa-note"></i>
+                            <i class="nav-icon fa fa-sticky-note"></i>
                             <p>یادداشت ها</p>
                         </a>
                     </li>
