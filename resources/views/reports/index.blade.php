@@ -114,8 +114,8 @@
         $(document).ready(function () {
 
             var currentPage = 1;
-            var apiUrl = 'http://127.0.0.1:7000/api/get-reports';
-            var apiUrlDesc = 'http://127.0.0.1:7000/api/get-report-desc/';
+            var apiUrl = 'https://parso.moshrefiholding.com/api/get-reports';
+            var apiUrlDesc = 'https://parso.moshrefiholding.com/api/get-report-desc/';
             var tbody = $('#reports');
 
 
@@ -175,8 +175,8 @@
             // تغییر آدرس API و به‌روزرسانی دکمه‌ها
             $('#perso-tejarat').click(function () {
                 tbody.empty();
-                apiUrl = 'http://127.0.0.1:7000/api/get-reports';
-                apiUrlDesc = 'http://127.0.0.1:7000/api/get-report-desc/';
+                apiUrl = 'https://parso.moshrefiholding.com/api/get-reports';
+                apiUrlDesc = 'https://parso.moshrefiholding.com/api/get-report-desc/';
                 $('.btn').removeClass('btn-primary').addClass('btn-light');
                 $(this).removeClass('btn-light').addClass('btn-primary');
                 fetchReports(1);
@@ -184,8 +184,8 @@
 
             $('#adak-tejarat').click(function () {
                 tbody.empty();
-                apiUrl = 'http://127.0.0.1:10000/api/get-reports';
-                apiUrlDesc = 'http://127.0.0.1:10000/api/get-report-desc/';
+                apiUrl = 'https://adaktejarat.moshrefiholding.com/api/get-reports';
+                apiUrlDesc = 'https://adaktejarat.moshrefiholding.com/api/get-report-desc/';
                 console.log(apiUrlDesc)
                 $('.btn').removeClass('btn-primary').addClass('btn-light');
                 $(this).removeClass('btn-light').addClass('btn-primary');
