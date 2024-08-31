@@ -26,10 +26,30 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/util.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
     <link rel="icon" href="https://moshrefiholding.com/wp-content/uploads/2023/08/logo-small-150x150.png" sizes="32x32">
-    <link rel="icon" href="https://moshrefiholding.com/wp-content/uploads/2023/08/logo-small-300x300.png" sizes="192x192">
+    <link rel="icon" href="https://moshrefiholding.com/wp-content/uploads/2023/08/logo-small-300x300.png"
+          sizes="192x192">
     <!--===============================================================================================-->
+    <style>
+        input:-webkit-autofill {
+            background-color: transparent !important;
+            /* سایر استایل‌های دلخواه */
+        }
+
+        /* برای Firefox */
+        input:-moz-autofill {
+            background-color: transparent !important;
+            /* سایر استایل‌های دلخواه */
+        }
+
+        /* برای Edge */
+        input:-ms-autofill {
+            background-color: transparent !important;
+            /* سایر استایل‌های دلخواه */
+        }
+    </style>
 </head>
 <body>
+
 
 <div class="limiter">
     <div class="container-login100" style="background-image: url('/assets/images/bg-01.jpg');">
