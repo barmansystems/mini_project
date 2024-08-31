@@ -32,19 +32,16 @@
     <style>
         input:-webkit-autofill {
             background-color: transparent !important;
-            /* سایر استایل‌های دلخواه */
         }
 
         /* برای Firefox */
         input:-moz-autofill {
             background-color: transparent !important;
-            /* سایر استایل‌های دلخواه */
         }
 
-        /* برای Edge */
         input:-ms-autofill {
             background-color: transparent !important;
-            /* سایر استایل‌های دلخواه */
+
         }
     </style>
 </head>

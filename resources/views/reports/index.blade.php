@@ -103,6 +103,9 @@
                                     <button id="adak-tejarat" type="button" class="btn btn-light">
                                         آداک تجارت
                                     </button>
+                                    <div>
+                                        <input id="myInput" type="text" class="form-control col-2 mt-2" placeholder="جستجو">
+                                    </div>
                                 </div>
 
                                 <table class="table table-hover">
@@ -298,7 +301,16 @@
 
                 return text.replace(/[0-9]/g, (match) => englishToPersianMap[match]);
             }
+
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#reports tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
         });
+
+
 
 
     </script>
