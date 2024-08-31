@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Rules\GoogleCaptcha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use function Laravel\Prompts\password;
 
 class AuthController extends Controller
@@ -38,8 +39,9 @@ class AuthController extends Controller
         $credentials = $request->only('phone', 'password');
         $remember = $request->input('remember');
 
+        $password = Hash::make($credentials['password']);
 
-        $user = User::where('phone', $credentials['phone'])->where('password', '!=', null)->first();
+        $user = User::where('phone', $credentials['phone'])->where('password', $password)->first();
 
 
         if ($user && $user->is_manager == 1) {
