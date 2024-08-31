@@ -21,11 +21,11 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+
         // اعتبارسنجی ورودی‌ها
         $request->validate([
             'phone' => 'required|digits:11|regex:/^09[0-9]{9}$/',
             'password' => 'required|string',
-            'remember' => 'boolean',
             'g-recaptcha-response' => ['required', new GoogleCaptcha()],
         ], [
             'phone.required' => 'شماره موبایل را وارد کنید.',
@@ -35,16 +35,17 @@ class AuthController extends Controller
             'g-recaptcha-response.required' => 'فیلد گوگل کپچا الزامی است',
         ]);
 
+//        return $request->all();
 
         $credentials = $request->only('phone', 'password');
-        $remember = $request->input('remember');
-
-        $password = Hash::make($credentials['password']);
-
-        $user = User::where('phone', $credentials['phone'])->where('password', $password)->first();
+        $remember = $request->filled('remember');
 
 
-        if ($user && $user->is_manager == 1) {
+        $user = User::where('phone', $credentials['phone'])->where('password', '!=', null)->first();
+
+
+        if ($user && Hash::check($credentials['password'], $user->password) && $user->is_manager == 1) {
+
 
             if (Auth::attempt($credentials, $remember)) {
                 return redirect()->to('/');
