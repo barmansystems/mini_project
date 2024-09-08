@@ -23,6 +23,9 @@ class UsersController extends Controller
         if (request('company') == "adakTejarat") {
             $users->where('company_name', 'adaktejarat');
         }
+        if (request('company') == "adakHamrah") {
+            $users->where('company_name', 'adakhamrah');
+        }
 
         $users = $users->latest()->paginate(30);
 

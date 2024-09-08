@@ -12,7 +12,6 @@
             top: 0;
             width: 100%;
             z-index: 40000;
-
         }
         .allLoading .allLoadings {
             align-items: center;
@@ -35,7 +34,6 @@
             position: relative;
             box-sizing: border-box;
             animation: rotation 1s linear infinite;
-
         }
 
         .loader::after {
@@ -50,7 +48,6 @@
             border-radius: 50%;
             border: 3px solid;
             border-color: #175ddc transparent;
-
         }
 
         @keyframes rotation {
@@ -102,6 +99,9 @@
                                     </button>
                                     <button id="adak-tejarat" type="button" class="btn btn-light">
                                         آداک تجارت
+                                    </button>
+                                    <button id="adak-hamrah" type="button" class="btn btn-light">
+                                        آداک همراه
                                     </button>
                                     <div>
                                         <input id="myInput" type="text" class="form-control col-2 mt-2" placeholder="جستجو">
@@ -268,6 +268,16 @@
                 fetchReports(1);
             });
 
+            $('#adak-hamrah').click(function () {
+                $('.allLoading').show();
+                tbody.empty();
+                apiUrl = 'https://adakhamrah.moshrefiholding.com/api/get-reports';
+                apiUrlDesc = 'https://adakhamrah.moshrefiholding.com/api/get-report-desc/';
+                console.log(apiUrlDesc)
+                $('.btn').removeClass('btn-primary').addClass('btn-light');
+                $(this).removeClass('btn-light').addClass('btn-primary');
+                fetchReports(1);
+            });
             $(document).on('click', '.report-info', function () {
                 var reportDesc = $('#reportDesc');
                 var reportId = $(this).data('id');
@@ -309,11 +319,5 @@
                 });
             });
         });
-
-
-
-
     </script>
-
 @endsection
-

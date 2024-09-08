@@ -41,7 +41,6 @@
 
         input:-ms-autofill {
             background-color: transparent !important;
-
         }
     </style>
 </head>
@@ -133,7 +132,6 @@
 <script src="/assets/vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 <script src="/assets/js/main.js"></script>
-
 </body>
 <script src="https://www.google.com/recaptcha/api.js?hl=fa" async defer></script>
 </html>

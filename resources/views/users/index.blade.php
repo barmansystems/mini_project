@@ -27,6 +27,7 @@
                                 <div class="btn-group-sm float-l">
                                     <a href="/users?company=parsoTejarat" class="btn {{ request('company') == 'parsoTejarat' ? 'btn-primary' : 'btn-light' }}">پرسو تجارت</a>
                                     <a href="/users?company=adakTejarat" class="btn  {{ request('company') == 'adakTejarat' ? 'btn-primary' : 'btn-light' }}">آداک تجارت</a>
+                                    <a href="/users?company=adakHamrah" class="btn  {{ request('company') == 'adakHamrah' ? 'btn-primary' : 'btn-light' }}">آداک همراه</a>
                                 </div>
                             </div>
                             <div class="card-body table-responsive p-0">
