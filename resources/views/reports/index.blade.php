@@ -103,6 +103,12 @@
                                     <button id="adak-hamrah" type="button" class="btn btn-light">
                                         آداک همراه
                                     </button>
+                                    <button id="barman-system" type="button" class="btn btn-light">
+                                        بارمان سیستم
+                                    </button>
+                                    <button id="sayman" type="button" class="btn btn-light">
+                                        سایمان داده
+                                    </button>
                                     <div>
                                         <input id="myInput" type="text" class="form-control col-2 mt-2" placeholder="جستجو">
                                     </div>
@@ -278,6 +284,18 @@
                 $(this).removeClass('btn-light').addClass('btn-primary');
                 fetchReports(1);
             });
+            $('#barman-system').click(function () {
+                $('.allLoading').show();
+                tbody.empty();
+                apiUrl = 'https://barmansystem.moshrefiholding.com/api/get-reports';
+                apiUrlDesc = 'https://barmansystem.moshrefiholding.com/api/get-report-desc/';
+                console.log(apiUrlDesc)
+                $('.btn').removeClass('btn-primary').addClass('btn-light');
+                $(this).removeClass('btn-light').addClass('btn-primary');
+                fetchReports(1);
+            });
+
+
             $(document).on('click', '.report-info', function () {
                 var reportDesc = $('#reportDesc');
                 var reportId = $(this).data('id');

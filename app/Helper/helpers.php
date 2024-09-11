@@ -30,6 +30,15 @@ if (!function_exists('company_name')) {
             case 'adaktejarat':
                 echo "آداک تجارت خورشید قشم";
                 break;
+            case 'adakhamrah':
+                echo "آداک همراه خورشید قشم";
+                break;
+            case 'barman':
+                echo "بارمان سیستم سرزمین پارس";
+                break;
+            case 'sayman':
+                echo "فناوران رایانه سایمان داده";
+                break;
         }
         return $variable;
 

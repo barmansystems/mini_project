@@ -28,6 +28,8 @@
                                     <a href="/users?company=parsoTejarat" class="btn {{ request('company') == 'parsoTejarat' ? 'btn-primary' : 'btn-light' }}">پرسو تجارت</a>
                                     <a href="/users?company=adakTejarat" class="btn  {{ request('company') == 'adakTejarat' ? 'btn-primary' : 'btn-light' }}">آداک تجارت</a>
                                     <a href="/users?company=adakHamrah" class="btn  {{ request('company') == 'adakHamrah' ? 'btn-primary' : 'btn-light' }}">آداک همراه</a>
+                                    <a href="/users?company=barman" class="btn  {{ request('company') == 'barman' ? 'btn-primary' : 'btn-light' }}">بارمان سیستم</a>
+                                    <a href="/users?company=sayman" class="btn  {{ request('company') == 'sayman' ? 'btn-primary' : 'btn-light' }}">سایمان داده</a>
                                 </div>
                             </div>
                             <div class="card-body table-responsive p-0">
