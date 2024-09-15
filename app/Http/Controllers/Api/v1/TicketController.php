@@ -120,13 +120,8 @@ class TicketController extends Controller
 
     public function getUsers(Request $request)
     {
-        $userToExclude = User::where('company_user_id', $request->user_id)
-            ->where('company_name', $request->company_name)
-            ->first();
-
-        $users = User::where('company_name', $request->company_name)
-            ->where('company_user_id', '!=', $userToExclude->company_user_id)
-            ->get();
+        $users = User::where('company_user_id', '!=', $request->user_id)
+            ->where('company_name', $request->company_name)->get();
         return response()->json($users);
     }
 
