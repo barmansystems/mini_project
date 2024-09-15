@@ -293,6 +293,16 @@
                 $(this).removeClass('btn-light').addClass('btn-primary');
                 fetchReports(1);
             });
+            $('#sayman').click(function () {
+                $('.allLoading').show();
+                tbody.empty();
+                apiUrl = 'https://sayman.moshrefiholding.com/api/get-reports';
+                apiUrlDesc = 'https://sayman.moshrefiholding.com/api/get-report-desc/';
+                console.log(apiUrlDesc)
+                $('.btn').removeClass('btn-primary').addClass('btn-light');
+                $(this).removeClass('btn-light').addClass('btn-primary');
+                fetchReports(1);
+            });
 
 
             $(document).on('click', '.report-info', function () {

@@ -1,7 +1,21 @@
-# Webalizer V2.23-08 Incremental Data - 08/29/2024 14:12:04
-2024 8 29 14 12 4
-848 701 8 47 9 7 21799562 778 55 0
-2 13 99 12 29
+# Webalizer V2.23-08 Incremental Data - 09/14/2024 16:49:22
+2024 9 14 16 49 22
+694 607 7 76 19 3 25267100 539 50 0
+3 17 146 1 14
+12 10 41748 2 12 2
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+1 1 3887 1 0 0
+0 0 0 0 0 0
+90 81 773883 4 73 9
+300 256 8147244 5 216 8
+44 44 245311 1 44 7
+52 42 10248122 2 39 7
+99 86 526802 3 95 8
+0 0 0 0 0 0
+0 0 0 0 0 0
+96 87 5280103 3 60 9
 0 0 0 0 0 0
 0 0 0 0 0 0
 0 0 0 0 0 0
@@ -13,44 +27,30 @@
 0 0 0 0 0 0
 0 0 0 0 0 0
 0 0 0 0 0 0
-200 150 3456248 4 191 7
-6 4 16382 2 6 2
-47 36 178650 3 47 6
-0 0 0 0 0 0
-2 0 3126 1 0 0
-0 0 0 0 0 0
-54 42 229298 4 53 6
-36 31 134489 2 36 4
-9 7 46762 2 9 3
-7 7 31535 1 7 3
-175 149 13756278 3 175 3
 0 0 0 0 0 0
 0 0 0 0 0 0
 0 0 0 0 0 0
-46 34 129552 3 46 5
-114 95 1490734 3 114 7
-109 107 1155166 2 74 6
-43 39 1171342 2 20 3
 0 0 0 0 0 0
 0 0 0 0 0 0
+0 0 0 0 0 0
+1 1 3887 0
 0 0 0 0
 0 0 0 0
 0 0 0 0
-2 0 3126 0
 0 0 0 0
 0 0 0 0
 0 0 0 0
+5 5 40644 5
+29 29 170150 29
+43 38 2637708 30
+66 60 814589 30
+141 132 5366883 58
+27 26 243944 23
+17 15 77754 17
+73 56 8958857 72
+214 178 2292297 197
+78 67 4660387 78
 0 0 0 0
-24 19 69012 24
-50 45 838451 14
-50 41 129426 49
-155 114 3000503 130
-272 226 6666291 268
-90 73 9182761 88
-31 27 116214 31
-78 70 1393987 78
-91 81 375834 91
-5 5 23957 5
 0 0 0 0
 0 0 0 0
 0 0 0 0
@@ -60,25 +60,25 @@
 0
 0
 0
-701
-43
+607
+1
 0
 0
-60
+47
 0
 0
 0
+0
+16
 0
 3
 0
-10
 0
 0
 0
 0
 0
-2
-10
+1
 0
 0
 0
@@ -99,169 +99,239 @@
 0
 0
 # -urls- 
+/api/get-task-desc
+0 3 0 565 0 0
 /assets/css/util.css
 0 2 0 25796 0 0
+/users
+0 42 0 129578 0 2
 /api/add-task-desc
-0 5 0 17672 0 0
+0 14 0 49485 0 0
 /api/get-users
-0 52 0 85026 12 12
+0 12 0 21610 4 5
+/tasks/17
+0 2 0 7080 0 1
+/dist/img/AdminLTELogo.png
+0 5 0 21031 0 0
 /api/edit-user
-0 20 0 75813 7 6
-/assets/vendor/bootstrap/css/bootstrap.min.css.map
-0 2 0 164178 0 0
+0 3 0 11477 1 2
+/dist/fonts/Vazir-Medium.woff2
+0 5 0 256848 0 0
+/dist/css/custom-style.css
+0 5 0 6949 0 0
+/dist/datepicker-jalali/bootstrap-datepicker.min.js
+0 3 0 39291 0 0
+/reports
+0 8 0 41325 0 0
+/tasks/13
+0 1 0 3547 0 0
+/dist/css/bootstrap-rtl.min.css
+0 5 0 6042 0 0
+/tasks/18
+0 3 0 10833 0 0
 /assets/fonts/vazir/Vazir.woff2
 0 2 0 76233 0 0
+/notes
+0 9 0 33263 0 1
+/dist/css/adminlte.min.css
+0 5 0 160510 0 0
 /assets/fonts/iconic/fonts/Material-Design-Iconic-Font.woff2
-0 2 0 76280 0 0
-/api/delete-task
-0 5 0 18930 0 0
+0 2 0 76298 0 0
 /api/create-task
-0 13 0 45945 0 0
+0 23 0 81309 0 0
 /api/change-task-status
-0 15 0 54050 0 0
-/uploads/Messages/2024/8/17239687561.2مرداد.xlsx
-0 1 0 20213 0 0
-/api/create-ticket
-0 5 0 18320 0 0
-/_ignition/health-check
-0 1 0 181 0 0
+0 9 0 32449 2 0
+/dist/js/datepicker.js
+0 3 0 3162 0 0
 /assets/vendor/css-hamburgers/hamburgers.min.css
-0 2 0 4346 0 0
+0 2 0 4381 0 0
+/dist/clockpicker/bootstrap-clockpicker.min.css
+0 2 0 2275 0 0
 /assets/vendor/bootstrap/js/bootstrap.min.js
-0 3 0 39105 0 0
-/favicon.ico
-0 5 0 440 0 0
-/test/1
-0 1 0 997 0 0
+0 2 0 26070 0 0
 /api/show-task
-0 149 0 741672 1 6
+0 111 0 725392 4 15
 /api/get-messages
-0 126 0 732681 1 7
+0 13 0 112165 2 3
+/dist/fonts/Vazir-Light.woff2
+0 5 0 243547 0 0
 /assets/vendor/select2/select2.min.css
 0 2 0 4082 0 0
+/dist/js/adminlte.min.js
+0 7 0 20719 0 0
+/tasks/create
+0 2 0 7144 0 0
 /assets/images/icons/favicon.ico
-0 1 0 3802 0 0
-/uploads/Messages/2024/8/1723453377_ca664de1-c5b0-47f6-884e-e9f70438876d.jpg
-0 4 0 287836 0 0
+0 2 0 7689 0 0
 /assets/vendor/jquery/jquery-3.2.1.min.js
-0 3 0 90626 0 0
+0 2 0 60406 0 0
+/dist/js/clockpicker.js
+0 3 0 1112 0 0
 /assets/vendor/select2/select2.min.js
-0 3 0 57264 0 0
+0 2 0 38176 0 0
+/plugins/bootstrap/js/bootstrap.bundle.min.js.map
+0 1 0 76517 0 0
 /assets/vendor/countdowntime/countdowntime.js
-0 3 0 1593 0 0
+0 2 0 1079 0 0
 /assets/vendor/animsition/js/animsition.min.js
-0 3 0 6090 0 0
+0 2 0 4077 0 0
+/dist/datepicker/daterangepicker.js
+0 3 0 71400 0 0
 /assets/vendor/daterangepicker/daterangepicker.js
-0 3 0 36303 0 0
+0 2 0 24202 0 0
 /login
-0 2 0 4026 0 1
+0 2 0 4439 0 0
 /api/add-user
-0 3 0 10475 1 2
+0 4 0 13975 3 0
+/tasks
+0 8 0 30766 0 0
 /api/update-task
-0 4 0 14135 0 0
+0 2 0 7069 0 0
+/dist/datepicker-jalali/bootstrap-datepicker.min.css
+0 2 0 2664 0 0
+/dist/datepicker/daterangepicker.css
+0 2 0 3472 0 0
 /assets/css/main.css
-0 2 0 4273 0 0
+0 2 0 4238 0 0
 /assets/vendor/daterangepicker/daterangepicker.css
-0 2 0 3312 0 0
+0 2 0 3347 0 0
+/dist/datepicker-jalali/bootstrap-datepicker.fa.min.js
+0 3 0 6053 0 0
 /assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css
 0 2 0 14214 0 0
-/api/delete-ticket
-0 7 0 24742 0 0
+/dist/clockpicker/bootstrap-clockpicker.min.js
+0 3 0 11421 0 0
 /assets/vendor/daterangepicker/moment.min.js
-0 3 0 45963 0 0
+0 2 0 30642 0 0
+/plugins/bootstrap/js/bootstrap.bundle.min.js
+0 7 0 145299 0 0
 /assets/fonts/iconic/css/material-design-iconic-font.min.css
 0 2 0 16118 0 0
 /
-0 42 0 27590 4 1
+0 19 0 49886 11 3
+/plugins/font-awesome/fonts/fontawesome-webfont.woff2
+0 5 0 386266 0 0
+/plugins/jdate/jdate.js
+0 6 0 477821 0 0
+/dist/fonts/Vazir-Bold.woff2
+0 5 0 209812 0 0
 /assets/js/main.js
-0 3 0 2321 0 0
+0 2 0 1468 0 0
 /api/get-all-tickets
-0 30 0 135903 4 1
+0 3 0 17147 1 0
 /assets/vendor/bootstrap/js/popper.js
-0 3 0 63837 0 0
+0 2 0 42558 0 0
+/plugins/jquery/jquery.min.js
+0 7 0 212621 0 0
+/tasks/16
+0 2 0 7166 0 0
+/dist/js/adminlte.min.js.map
+0 1 0 6743 0 0
 /assets/vendor/animate/animate.css
 0 2 0 5952 0 0
+/dist/fonts/Vazir.woff2
+0 5 0 190525 0 0
 /api/get-all-tasks
-0 106 0 486448 11 6
+0 110 0 648529 15 9
 /assets/images/bg-01.jpg
-0 2 0 503836 0 0
+0 2 0 503835 0 0
+/plugins/select2/select2.min.js
+0 3 0 54053 0 0
 /assets/vendor/animsition/css/animsition.min.css
-0 2 0 4625 0 0
+0 2 0 4590 0 0
+/plugins/select2/select2.min.css
+0 2 0 3973 0 0
+/plugins/font-awesome/css/font-awesome.min.css
+0 5 0 35628 0 0
+/notes/delete
+0 1 0 815 0 0
 /api/get-my-tickets
-0 33 0 127100 6 2
+0 10 0 38094 2 0
 /api/get-all-users
-0 26 0 18360 3 3
+0 40 0 34206 3 3
 /assets/vendor/bootstrap/css/bootstrap.min.css
 0 2 0 37344 0 0
 # End Of Table - urls
 # -sites- (monthly)
-91.206.178.23
-0 11 6 23192 2 1724070538
-/api/get-users
 45.87.4.46
-0 39 19 16857 4 1724775995
+0 100 56 167407 8 1726332240
+/api/get-users
+46.165.250.77
+0 13 12 116334 1 1725810035
+/api/get-task-desc
+93.126.16.109
+0 87 82 1565034 1 1725796795
+/login
+104.234.1.28
+0 10 5 4940 1 1725726596
 /api/get-all-users
-78.153.140.224
-0 2 0 3126 0 0
--
-109.230.83.114
-0 27 14 39162 5 1723979660
-/api/get-users
 193.36.84.21
-0 600 538 19173647 32 1724940724
-/api/add-task-desc
+0 326 307 21201958 31 1726332562
+/api/get-my-tickets
 45.93.170.154
-0 153 115 2393613 8 1724931005
-/
-91.107.137.205
-0 14 7 147451 3 1723980948
-/api/get-users
-35.195.25.18
-0 2 2 2514 1 1724331690
-/
+0 157 144 2207540 8 1726331156
+/reports
+104.28.156.57
+0 1 1 3887 0 0
+-
 # End Of Table - sites (monthly)
 # -sites- (daily)
+45.87.4.46
+0 4 2 1824 2 1726332240
+/api/get-users
 193.36.84.21
-0 14 14 63227 2 1724940724
-/api/add-task-desc
+0 41 37 4531036 5 1726332562
+/api/get-my-tickets
 45.93.170.154
-0 29 25 1108115 1 1724931005
-/
+0 51 48 747243 2 1726331156
+/reports
 # End Of Table - sites (daily)
 # -referrers- 
+https://app.moshrefiholding.com/dist/css/custom-style.css
+0 20
+https://app.moshrefiholding.com/tasks
+0 15
 https://adaktejarat.moshrefiholding.com/
-0 32
+0 30
 https://app.moshrefiholding.com/login
-0 41
-https://app.moshrefiholding.com/uploads/Messages/2024/8/1723453377_ca664de1-c5b0-47f6-884e-e9f70438876d.jpg
+0 43
+https://app.moshrefiholding.com/users
+0 39
+https://sayman.moshrefiholding.com/
 0 2
 https://app.moshrefiholding.com/assets/fonts/iconic/css/material-design-iconic-font.min.css
 0 2
 - (Direct Request)
-0 673
+0 359
+https://app.moshrefiholding.com/tasks/create
+0 23
 https://app.moshrefiholding.com/
+0 64
+https://barmansystem.moshrefiholding.com/
 0 4
-https://app.moshrefiholding.com/test/1
+https://myactivity.google.com/
 0 1
 https://app.moshrefiholding.com/assets/css/main.css
 0 2
+https://app.moshrefiholding.com/notes
+0 12
+https://app.moshrefiholding.com/tasks/18
+0 2
+https://app.moshrefiholding.com/tasks/16
+0 1
+https://app.moshrefiholding.com/plugins/font-awesome/css/font-awesome.min.css
+0 5
+https://app.moshrefiholding.com/reports
+0 12
 https://parso.moshrefiholding.com/
-0 91
+0 58
 # End Of Table - referrers
 # -agents- 
-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0
-0 18
 GuzzleHttp/7
-0 606
-Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36
-0 191
-Mozilla/5.0 (Windows NT 5.1) AppleWebKit/534.57.2 (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2
-0 1
+0 326
 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36
-0 29
-python-requests/2.32.2
-0 2
-Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3 (.NET CLR 3.5.30729)
+0 367
+Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Mobile Safari/537.36
 0 1
 # End Of Table - agents
 # -search strings- 
