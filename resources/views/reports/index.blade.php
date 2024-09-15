@@ -228,7 +228,6 @@
                 `);
                         });
 
-                        // مدیریت دکمه‌های صفحه‌بندی
                         $('#prev-page').toggle(!!response.prev_page_url);
                         $('#next-page').toggle(!!response.next_page_url);
 

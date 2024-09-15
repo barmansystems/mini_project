@@ -39,6 +39,9 @@ if (!function_exists('company_name')) {
             case 'sayman':
                 echo "فناوران رایانه سایمان داده";
                 break;
+            case 'adakpetro':
+                echo "آداک پترو خورشید قشم";
+                break;
         }
         return $variable;
 
