@@ -30,6 +30,7 @@
                                     <a href="/users?company=adakHamrah" class="btn  {{ request('company') == 'adakHamrah' ? 'btn-primary' : 'btn-light' }}">آداک همراه</a>
                                     <a href="/users?company=barman" class="btn  {{ request('company') == 'barman' ? 'btn-primary' : 'btn-light' }}">بارمان سیستم</a>
                                     <a href="/users?company=sayman" class="btn  {{ request('company') == 'sayman' ? 'btn-primary' : 'btn-light' }}">سایمان داده</a>
+                                    <a href="/users?company=adakPetro" class="btn  {{ request('company') == 'adakPetro' ? 'btn-primary' : 'btn-light' }}">آداک پترو</a>
                                 </div>
                             </div>
                             <div class="card-body table-responsive p-0">
