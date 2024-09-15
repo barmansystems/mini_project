@@ -222,10 +222,8 @@ class TicketController extends Controller
         return 'success';
     }
 
-
     public function changeStatusTicket(Request $request)
     {
-
         $ticket = Ticket::whereId($request->ticket_id)->first();
         $user = User::where(['company_user_id' => $request->user_id, 'company_name' => $request->company])->first();
         if ($ticket->sender_id == $user->id || $ticket->receiver_id == $user->id) {
@@ -245,7 +243,6 @@ class TicketController extends Controller
             ], 404);
         }
     }
-
     public function addUserToMoshrefi(Request $request)
     {
         $user = new User();
@@ -257,7 +254,6 @@ class TicketController extends Controller
         $user->phone = $request->phone;
         $user->save();
     }
-
     public function editUserToMoshrefi(Request $request)
     {
 //        return $request->all();
@@ -271,11 +267,9 @@ class TicketController extends Controller
         $user->save();
         return $user;
     }
-
     public function deleteUserToMoshrefi(Request $request)
     {
         $user = User::where(['company_user_id' => $request->user_id, 'company_name' => $request->company])->first();
         $user->delete();
     }
-
 }
