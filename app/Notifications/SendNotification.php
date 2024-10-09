@@ -81,6 +81,21 @@ class SendNotification extends Notification implements ShouldQueue
             case 'barman':
                 $domain = env('BARMAN_PANEL_URL') . 'api/send-notification-to-user';
                 break;
+            case "sayman":
+                $domain = env('SAYMAN_PANEL_URL') . 'api/send-notification-to-user';
+                break;
+            case "adakhamrah":
+                $domain = env('ADAKHAMRAH_PANEL_URL') . 'api/send-notification-to-user';
+                break;
+            case "adaktejarat":
+                $domain = env('ADAKTEJARAT_PANEL_URL') . 'api/send-notification-to-user';
+                break;
+            case "adaksanat":
+                $domain = env('ADAKSANAT_PANEL_URL') . 'api/send-notification-to-user';
+                break;
+            case "adakpetro":
+                $domain = env('ADAKPETRO_PANEL_URL') . 'api/send-notification-to-user';
+                break;
             default:
                 $domain = 'Domain not found';
         }
